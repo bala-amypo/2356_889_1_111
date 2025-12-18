@@ -7,6 +7,8 @@ public class HabitProfile{
     private String sleepSchedule;
     @Min(100)
     private int studyHoursPerDay;
-    private String clean
+    private String cleanlinessLevel;
+    private String noiseTolerance;
+    private String socialPerference;
     private LocalDateTime updatedAt;
 }
