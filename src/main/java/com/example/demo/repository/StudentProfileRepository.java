@@ -1,3 +1,7 @@
 package com.example.demo.repository;
 
-import org.springframework.data.jpa.repository.Jpa
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.model.StudentProfile;
+
+public class StudentProfileRepository extends
