@@ -1,6 +1,7 @@
-package com.example.project.entity;
+package com.example.demo.model;
 
 import java.time.LocalDateTime;
+import jakarta.presistence.*;
 
 public class MatchAttemptRecord {
     @Id

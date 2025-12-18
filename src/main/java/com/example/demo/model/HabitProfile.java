@@ -1,7 +1,7 @@
 package.com.example.demo.model;
 
 import java.time.LocalDateTime;
-
+import jakarta.presistence.*;
 import jakarta.validation.constraints.Min;
 
 public class HabitProfile{

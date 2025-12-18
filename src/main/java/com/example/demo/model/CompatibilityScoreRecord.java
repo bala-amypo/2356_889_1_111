@@ -1,8 +1,8 @@
 
-package com.example.project.entity;
+package com.example.demo.model;
 
 import java.time.LocalDateTime;
-
+import jakarta.presistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public class CompatibilityScoreRecord {

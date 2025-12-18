@@ -1,6 +1,7 @@
 package.com.example.demo.model;
 
 import java.time.LocalDateTime;
+import jakarta.presistence.*;
 
 public class StudentProfile{
     @Id
