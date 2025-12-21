@@ -28,8 +28,8 @@ public class CompatibilityScoreRecord {
     public CompatibilityScoreRecord() {}
 
     public CompatibilityScoreRecord(Long id, Long studentAId, Long studentBId,
-                                    Double score, CompatibilityLevel compatibilityLevel,
-                                    LocalDateTime computedAt, String detailsJson) {
+        Double score, CompatibilityLevel compatibilityLevel,
+        LocalDateTime computedAt, String detailsJson) {
         this.id = id;
         this.studentAId = studentAId;
         this.studentBId = studentBId;
