@@ -1,21 +1,37 @@
 package com.example.demo.model;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
-import jakarta.presistence.*;
 
+@Entity
 public class StudentProfile{
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(unique=true)
     private String studentId;
-    private String fullName;
+
+    private String  fullName;
+
+    @Column(unique=true)
     private String email;
+
     private String department;
-    private int yearlevel;
-    private boolean active;
+    
+    private Integer yearLevel;
+
+    private Boolean active=true;
+    
     private LocalDateTime createdAt;
+    
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -37,33 +53,23 @@ public class StudentProfile{
     public void setEmail(String email) {
         this.email = email;
     }
-    public StudentProfile(Long id, String studentId, String fullName, String email, String department, int yearlevel,
-            boolean active, LocalDateTime createdAt) {
-        this.id = id;
-        this.studentId = studentId;
-        this.fullName = fullName;
-        this.email = email;
-        this.department = department;
-        this.yearlevel = yearlevel;
-        this.active = active;
-        this.createdAt = createdAt;
-    }
     public String getDepartment() {
         return department;
     }
     public void setDepartment(String department) {
         this.department = department;
     }
-    public int getYearlevel() {
-        return yearlevel;
+    public Integer getYearLevel() {
+        return yearLevel;
     }
-    public void setYearlevel(int yearlevel) {
-        this.yearlevel = yearlevel;
+    public void setYearLevel(Integer yearLevel) {
+        this.yearLevel = yearLevel;
     }
-    public boolean isActive() {
+
+    public Boolean getActive() {
         return active;
     }
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
     public LocalDateTime getCreatedAt() {
@@ -72,5 +78,17 @@ public class StudentProfile{
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public StudentProfile(Long id,String studentId,String fullName,String email,String department,Integer yearLevel,Boolean active,LocalDateTime createdAt){
+        this.id=id;
+        this.studentId=studentId;
+        this.fullName=fullName;
+        this.email=email;
+        this.department=department;
+        this.yearLevel=yearLevel;
+        this.active=active;
+        this.createdAt=createdAt;
+    }
+    public StudentProfile(){
 
+    }
 }

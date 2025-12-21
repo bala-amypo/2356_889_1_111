@@ -1,77 +1,100 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import jakarta.presistence.*;
-import jakarta.validation.constraints.Min;
 
-public class HabitProfile{
+@Entity
+public class HabitProfile {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long studentId;
-    private String sleepSchedule;
-    @Min(100)
-    private int studyHoursPerDay;
-    private String cleanlinessLevel;
-    public HabitProfile(Long id, Long studentId, String sleepSchedule, @Min(100) int studyHoursPerDay,
-            String cleanlinessLevel, String noiseTolerance, String socialPerference, LocalDateTime updatedAt) {
-        this.id = id;
-        this.studentId = studentId;
-        this.sleepSchedule = sleepSchedule;
-        this.studyHoursPerDay = studyHoursPerDay;
-        this.cleanlinessLevel = cleanlinessLevel;
-        this.noiseTolerance = noiseTolerance;
-        this.socialPerference = socialPerference;
-        this.updatedAt = updatedAt;
-    }
-    private String noiseTolerance;
-    private String socialPerference;
+
+    @Enumerated(EnumType.STRING)
+    private SleepSchedule sleepSchedule;
+
+    private Integer studyHoursPerDay;
+
+    @Enumerated(EnumType.STRING)
+    private CleanlinessLevel cleanlinessLevel;
+
+    @Enumerated(EnumType.STRING)
+    private NoiseTolerance noiseTolerance;
+
+    @Enumerated(EnumType.STRING)
+    private SocialPreference socialPreference;
+
     private LocalDateTime updatedAt;
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
+
+    public HabitProfile() {}
+
+    public HabitProfile(Long id,
+                        Long studentId,
+                        Integer studyHoursPerDay,
+                        SleepSchedule sleepSchedule,
+                        CleanlinessLevel cleanlinessLevel,
+                        NoiseTolerance noiseTolerance,
+                        SocialPreference socialPreference,
+                        LocalDateTime updatedAt) {
         this.id = id;
-    }
-    public Long getStudentId() {
-        return studentId;
-    }
-    public void setStudentId(Long studentId) {
         this.studentId = studentId;
-    }
-    public String getSleepSchedule() {
-        return sleepSchedule;
-    }
-    public void setSleepSchedule(String sleepSchedule) {
-        this.sleepSchedule = sleepSchedule;
-    }
-    public int getStudyHoursPerDay() {
-        return studyHoursPerDay;
-    }
-    public void setStudyHoursPerDay(int studyHoursPerDay) {
         this.studyHoursPerDay = studyHoursPerDay;
-    }
-    public String getCleanlinessLevel() {
-        return cleanlinessLevel;
-    }
-    public void setCleanlinessLevel(String cleanlinessLevel) {
+        this.sleepSchedule = sleepSchedule;
         this.cleanlinessLevel = cleanlinessLevel;
-    }
-    public String getNoiseTolerance() {
-        return noiseTolerance;
-    }
-    public void setNoiseTolerance(String noiseTolerance) {
         this.noiseTolerance = noiseTolerance;
-    }
-    public String getSocialPerference() {
-        return socialPerference;
-    }
-    public void setSocialPerference(String socialPerference) {
-        this.socialPerference = socialPerference;
-    }
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.socialPreference = socialPreference;
         this.updatedAt = updatedAt;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
+
+    public SleepSchedule getSleepSchedule() { return sleepSchedule; }
+    public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
+
+    public Integer getStudyHoursPerDay() { return studyHoursPerDay; }
+    public void setStudyHoursPerDay(Integer studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
+
+    public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
+
+    public NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+
+    public SocialPreference getSocialPreference() { return socialPreference; }
+    public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+   
+
+    public enum SleepSchedule {
+        EARLY,
+        REGULAR,
+        LATE
+    }
+
+    public enum CleanlinessLevel {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+
+    public enum NoiseTolerance {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+
+    public enum SocialPreference {
+        INTROVERT,
+        EXTROVERT,
+        BALANCED
     }
 }
