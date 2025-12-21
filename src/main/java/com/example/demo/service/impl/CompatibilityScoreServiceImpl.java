@@ -43,19 +43,19 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
             }
         }
 
-        // Fetch habit profiles
+        
         HabitProfile h1 = habitRepo.findByStudentId(id1)
                 .orElseThrow(() -> new ResourceNotFoundException("Habit profile not found for student " + id1));
 
         HabitProfile h2 = habitRepo.findByStudentId(id2)
                 .orElseThrow(() -> new ResourceNotFoundException("Habit profile not found for student " + id2));
 
-        // ✅ Compute compatibility score
+       
         Double score = Math.abs(
                 h1.getStudyHoursPerDay().doubleValue() - h2.getStudyHoursPerDay().doubleValue()
         );
 
-        // Save new CompatibilityScoreRecord
+       
         CompatibilityScoreRecord record = new CompatibilityScoreRecord();
         record.setStudentAId(id1);
         record.setStudentBId(id2);

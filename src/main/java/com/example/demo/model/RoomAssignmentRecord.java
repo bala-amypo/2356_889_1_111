@@ -25,8 +25,8 @@ public class RoomAssignmentRecord {
     public RoomAssignmentRecord() {}
 
     public RoomAssignmentRecord(Long id, String roomNumber, Long studentAId,
-                                Long studentBId, LocalDateTime assignedAt,
-                                Status status) {
+        Long studentBId, LocalDateTime assignedAt,
+        Status status) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.studentAId = studentAId;
