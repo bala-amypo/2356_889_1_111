@@ -12,7 +12,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-    // Handle resource not found
+    
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex) {
 
@@ -25,7 +25,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    // Handle bad requests
+    
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> handleBadRequest(IllegalArgumentException ex) {
 
@@ -38,7 +38,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle other exceptions
+    
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneralException(Exception ex) {
 
