@@ -20,7 +20,7 @@ public class HabitProfileServiceImpl implements HabitProfileService {
 
     @Override
     public HabitProfile createOrUpdateHabit(HabitProfile habit) {
-        // Use the correct getter
+        
         Integer studyHours = habit.getStudyHoursPerDay();
         if (studyHours == null || studyHours < 0 || studyHours > 24) {
             throw new IllegalArgumentException("Study hours must be between 0 and 24");

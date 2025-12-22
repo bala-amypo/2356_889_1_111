@@ -32,14 +32,13 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
             throw new IllegalArgumentException("Same student IDs provided");
         }
 
-        // Check if score already exists
         List<CompatibilityScoreRecord> existing =
                 scoreRepo.findByStudentAIdOrStudentBId(id1, id2);
 
         for (CompatibilityScoreRecord r : existing) {
             if ((r.getStudentAId().equals(id1) && r.getStudentBId().equals(id2)) ||
                 (r.getStudentAId().equals(id2) && r.getStudentBId().equals(id1))) {
-                return r; // Return existing score
+                return r; 
             }
         }
 
