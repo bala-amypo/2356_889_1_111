@@ -1,27 +1,45 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "match_attempt_records")
 public class MatchAttemptRecord {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long initiatorStudentId;
-    private Long candidateStudentId;
+    @Column(nullable = false)
+    private Long studentId;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    private Integer attemptCount;
 
-    public Long getInitiatorStudentId() { return initiatorStudentId; }
-    public void setInitiatorStudentId(Long initiatorStudentId) {
-        this.initiatorStudentId = initiatorStudentId;
+    public MatchAttemptRecord() {
     }
 
-    public Long getCandidateStudentId() { return candidateStudentId; }
-    public void setCandidateStudentId(Long candidateStudentId) {
-        this.candidateStudentId = candidateStudentId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public Integer getAttemptCount() {
+        return attemptCount;
+    }
+
+    public void setAttemptCount(Integer attemptCount) {
+        this.attemptCount = attemptCount;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface MatchAttemptService {
 
-    MatchAttemptRecord computeMatch(Long initiatorStudentId, Long candidateStudentId);
+    MatchAttemptRecord computeMatch(Long studentAId, Long studentBId);
 
     List<MatchAttemptRecord> getMatchesForStudent(Long studentId);
 
