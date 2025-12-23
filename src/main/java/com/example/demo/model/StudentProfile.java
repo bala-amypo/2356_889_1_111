@@ -16,9 +16,6 @@ public class StudentProfile {
     private String email;
     private boolean active;
 
-    public StudentProfile() {
-    }
-
     public Long getId() {
         return id;
     }
