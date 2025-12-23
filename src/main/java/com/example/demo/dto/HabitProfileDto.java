@@ -1,17 +1,13 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.SleepSchedule;
-import com.example.demo.model.CleanlinessLevel;
-import com.example.demo.model.NoiseTolerance;
-import com.example.demo.model.SocialPreference;
-
 public class HabitProfileDto {
 
     private Long studentId;
-    private SleepSchedule sleepSchedule;
-    private CleanlinessLevel cleanlinessLevel;
-    private NoiseTolerance noiseTolerance;
-    private SocialPreference socialPreference;
+
+    private String sleepSchedule;
+    private String cleanlinessLevel;
+    private String noiseTolerance;
+    private String socialPreference;
 
     public Long getStudentId() {
         return studentId;
@@ -21,35 +17,35 @@ public class HabitProfileDto {
         this.studentId = studentId;
     }
 
-    public SleepSchedule getSleepSchedule() {
+    public String getSleepSchedule() {
         return sleepSchedule;
     }
 
-    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+    public void setSleepSchedule(String sleepSchedule) {
         this.sleepSchedule = sleepSchedule;
     }
 
-    public CleanlinessLevel getCleanlinessLevel() {
+    public String getCleanlinessLevel() {
         return cleanlinessLevel;
     }
 
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+    public void setCleanlinessLevel(String cleanlinessLevel) {
         this.cleanlinessLevel = cleanlinessLevel;
     }
 
-    public NoiseTolerance getNoiseTolerance() {
+    public String getNoiseTolerance() {
         return noiseTolerance;
     }
 
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+    public void setNoiseTolerance(String noiseTolerance) {
         this.noiseTolerance = noiseTolerance;
     }
 
-    public SocialPreference getSocialPreference() {
+    public String getSocialPreference() {
         return socialPreference;
     }
 
-    public void setSocialPreference(SocialPreference socialPreference) {
+    public void setSocialPreference(String socialPreference) {
         this.socialPreference = socialPreference;
     }
 }

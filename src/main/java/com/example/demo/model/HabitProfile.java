@@ -1,10 +1,9 @@
 package com.example.demo.model;
 
-import com.example.demo.model.enums.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "habit_profile")
+@Table(name = "habit_profiles")
 public class HabitProfile {
 
     @Id
@@ -13,17 +12,10 @@ public class HabitProfile {
 
     private Long studentId;
 
-    @Enumerated(EnumType.STRING)
-    private SleepSchedule sleepSchedule;
-
-    @Enumerated(EnumType.STRING)
-    private CleanlinessLevel cleanlinessLevel;
-
-    @Enumerated(EnumType.STRING)
-    private NoiseTolerance noiseTolerance;
-
-    @Enumerated(EnumType.STRING)
-    private SocialPreference socialPreference;
+    private String sleepSchedule;
+    private String cleanlinessLevel;
+    private String noiseTolerance;
+    private String socialPreference;
 
     public Long getId() {
         return id;
@@ -33,43 +25,39 @@ public class HabitProfile {
         return studentId;
     }
 
-    public SleepSchedule getSleepSchedule() {
-        return sleepSchedule;
-    }
-
-    public CleanlinessLevel getCleanlinessLevel() {
-        return cleanlinessLevel;
-    }
-
-    public NoiseTolerance getNoiseTolerance() {
-        return noiseTolerance;
-    }
-
-    public SocialPreference getSocialPreference() {
-        return socialPreference;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
-    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+    public String getSleepSchedule() {
+        return sleepSchedule;
+    }
+
+    public void setSleepSchedule(String sleepSchedule) {
         this.sleepSchedule = sleepSchedule;
     }
 
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+    public String getCleanlinessLevel() {
+        return cleanlinessLevel;
+    }
+
+    public void setCleanlinessLevel(String cleanlinessLevel) {
         this.cleanlinessLevel = cleanlinessLevel;
     }
 
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+    public String getNoiseTolerance() {
+        return noiseTolerance;
+    }
+
+    public void setNoiseTolerance(String noiseTolerance) {
         this.noiseTolerance = noiseTolerance;
     }
 
-    public void setSocialPreference(SocialPreference socialPreference) {
+    public String getSocialPreference() {
+        return socialPreference;
+    }
+
+    public void setSocialPreference(String socialPreference) {
         this.socialPreference = socialPreference;
     }
 }
