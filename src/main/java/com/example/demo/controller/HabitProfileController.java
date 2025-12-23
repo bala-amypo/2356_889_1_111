@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.service.HabitProfileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/habits")
+@Tag(name = "Habit Profiles")
 public class HabitProfileController {
 
     private final HabitProfileService service;
@@ -16,22 +18,12 @@ public class HabitProfileController {
     }
 
     @PostMapping
-    public HabitProfile createOrUpdate(@RequestBody HabitProfile h) {
-        return service.createOrUpdateHabit(h);
+    public HabitProfile createOrUpdate(@RequestBody HabitProfileDto dto) {
+        return service.createOrUpdate(dto);
     }
 
     @GetMapping("/student/{studentId}")
-    public HabitProfile byStudent(@PathVariable Long studentId) {
-        return service.getHabitByStudent(studentId);
-    }
-
-    @GetMapping("/{id}")
-    public HabitProfile byId(@PathVariable Long id) {
-        return service.getHabitById(id);
-    }
-
-    @GetMapping
-    public List<HabitProfile> getAll() {
-        return service.getAllHabitProfiles();
+    public HabitProfile getForStudent(@PathVariable Long studentId) {
+        return service.getForStudent(studentId);
     }
 }

@@ -4,9 +4,14 @@ import com.example.demo.model.RoomAssignmentRecord;
 import java.util.List;
 
 public interface RoomAssignmentService {
-    RoomAssignmentRecord assignRoom(RoomAssignmentRecord record);
-    RoomAssignmentRecord updateRoomStatus(Long id, String status);
-    List<RoomAssignmentRecord> getAssignmentsForStudent(Long studentId);
+
+    RoomAssignmentRecord assignRoom(RoomAssignmentRecord assignment);
+
     RoomAssignmentRecord getAssignmentById(Long id);
-    List<RoomAssignmentRecord> getAllRoomAssignments();
+
+    List<RoomAssignmentRecord> getAssignmentsByStudent(Long studentId);
+
+    List<RoomAssignmentRecord> getAllAssignments();
+
+    RoomAssignmentRecord updateStatus(Long id, String status);
 }

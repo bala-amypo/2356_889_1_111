@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MatchServiceImpl implements MatchService {
+public class MatchAttemptServiceImpl implements MatchAttemptService {
 
     private final StudentProfileRepository studentRepo;
     private final HabitProfileRepository habitRepo;
     private final CompatibilityScoreRecordRepository scoreRepo;
 
-    public MatchServiceImpl(
+    public MatchAttemptServiceImpl(
             StudentProfileRepository studentRepo,
             HabitProfileRepository habitRepo,
             CompatibilityScoreRecordRepository scoreRepo) {
@@ -26,7 +26,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public CompatibilityScoreRecord compute(Long studentAId, Long studentBId) {
+    public CompatibilityScoreRecord computeMatch(Long studentAId, Long studentBId) {
 
         studentRepo.findById(studentAId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
@@ -40,25 +40,25 @@ public class MatchServiceImpl implements MatchService {
 
         double score = Math.abs(studentAId - studentBId) % 100;
 
-        CompatibilityScoreRecord r =
+        CompatibilityScoreRecord record =
                 scoreRepo.findByStudentAIdAndStudentBId(studentAId, studentBId)
                         .orElse(new CompatibilityScoreRecord());
 
-        r.setStudentAId(studentAId);
-        r.setStudentBId(studentBId);
-        r.setScore(score);
-        r.setCompatibilityLevel(score > 70 ? "HIGH" : "MEDIUM");
+        record.setStudentAId(studentAId);
+        record.setStudentBId(studentBId);
+        record.setScore(score);
+        record.setCompatibilityLevel(score >= 70 ? "HIGH" : "MEDIUM");
 
-        return scoreRepo.save(r);
+        return scoreRepo.save(record);
     }
 
     @Override
-    public List<CompatibilityScoreRecord> getMatchesFor(Long studentId) {
+    public List<CompatibilityScoreRecord> getMatchesForStudent(Long studentId) {
         return scoreRepo.findByStudentAIdOrStudentBId(studentId, studentId);
     }
 
     @Override
-    public CompatibilityScoreRecord getById(Long id) {
+    public CompatibilityScoreRecord getMatchById(Long id) {
         return scoreRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
     }

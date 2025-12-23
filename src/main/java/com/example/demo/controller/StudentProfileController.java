@@ -1,59 +1,43 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.StudentProfileDto;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@Tag(name = "Student API", description = "Operations for student profiles")
 @RestController
 @RequestMapping("/api/students")
+@Tag(name = "Student Profiles")
 public class StudentProfileController {
 
-    private final StudentProfileService ser;
+    private final StudentProfileService service;
 
-public StudentProfileController(StudentProfileService ser){
-    this.ser = ser;
-}
-
+    public StudentProfileController(StudentProfileService service) {
+        this.service = service;
+    }
 
     @PostMapping
-    public StudentProfile addStudent(@RequestBody StudentProfile profile) {
-        return ser.createStudent(profile);
+    public StudentProfile create(@RequestBody StudentProfileDto dto) {
+        return service.create(dto);
     }
 
     @GetMapping("/{id}")
-    public StudentProfile getStudentById(@PathVariable Long id) {
-        return ser.getStudentById(id);
+    public StudentProfile getById(@PathVariable Long id) {
+        return service.get(id);
     }
 
     @GetMapping
-    public List<StudentProfile> getAllStudents() {
-        return ser.getAllStudents();
+    public List<StudentProfile> getAll() {
+        return service.getAll();
     }
 
-    @PutMapping("/{id}/status")
-public StudentProfile updateStudentStatus(
-        @PathVariable Long id,
-        @RequestParam boolean active) {
-    return ser.updateStudentStatus(id, active);
-}
-
-
-    @GetMapping("/lookup/{studentId}")
-    public StudentProfile getByStudentId(@PathVariable String studentId) {
-        return ser.findByStudentId(studentId);
+    @PutMapping("/{id}")
+    public StudentProfile update(
+            @PathVariable Long id,
+            @RequestBody StudentProfileDto dto) {
+        return service.update(id, dto);
     }
 }
