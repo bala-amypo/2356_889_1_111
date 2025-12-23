@@ -1,43 +1,65 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
+@Entity
 public class HabitProfile {
 
-    private Long id;
+    @Id
     private Long studentId;
 
+    @Enumerated(EnumType.STRING)
     private SleepSchedule sleepSchedule;
+
+    @Enumerated(EnumType.STRING)
     private CleanlinessLevel cleanlinessLevel;
+
+    @Enumerated(EnumType.STRING)
     private NoiseTolerance noiseTolerance;
+
+    @Enumerated(EnumType.STRING)
     private SocialPreference socialPreference;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    public Long getStudentId() {
+        return studentId;
+    }
 
-    // ===== GETTERS & SETTERS (TESTS REQUIRE ALL) =====
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public SleepSchedule getSleepSchedule() {
+        return sleepSchedule;
+    }
 
-    public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
+    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+        this.sleepSchedule = sleepSchedule;
+    }
 
-    public SleepSchedule getSleepSchedule() { return sleepSchedule; }
-    public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
+    public CleanlinessLevel getCleanlinessLevel() {
+        return cleanlinessLevel;
+    }
 
-    public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+        this.cleanlinessLevel = cleanlinessLevel;
+    }
 
-    public NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+    public NoiseTolerance getNoiseTolerance() {
+        return noiseTolerance;
+    }
 
-    public SocialPreference getSocialPreference() { return socialPreference; }
-    public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+        this.noiseTolerance = noiseTolerance;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public SocialPreference getSocialPreference() {
+        return socialPreference;
+    }
 
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public void setSocialPreference(SocialPreference socialPreference) {
+        this.socialPreference = socialPreference;
+    }
 }
