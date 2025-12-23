@@ -12,20 +12,24 @@ public class MatchAttemptServiceImpl implements MatchAttemptService {
 
     private final MatchAttemptRecordRepository repo;
 
+    
     public MatchAttemptServiceImpl(MatchAttemptRecordRepository repo) {
         this.repo = repo;
     }
+
 
     @Override
     public MatchAttemptRecord logMatchAttempt(MatchAttemptRecord record) {
         return repo.save(record);
     }
 
+   
     @Override
     public List<MatchAttemptRecord> getAttemptsByStudent(Long studentId) {
-        return repo.findByStudentId(studentId);
+        return repo.findByInitiatorStudentIdOrCandidateStudentId(studentId, studentId);
     }
 
+ 
     @Override
     public MatchAttemptRecord getAttemptById(Long id) {
         return repo.findById(id).orElse(null);
