@@ -25,6 +25,13 @@ public class HabitProfile {
     @Enumerated(EnumType.STRING)
     private SocialPreference socialPreference;
 
+
+    public enum SleepSchedule { EARLY, REGULAR, LATE }
+    public enum CleanlinessLevel { LOW, MEDIUM, HIGH }
+    public enum NoiseTolerance { LOW, MEDIUM, HIGH }
+    public enum SocialPreference { INTROVERT, BALANCED, EXTROVERT }
+
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -32,17 +39,27 @@ public class HabitProfile {
     public void setStudentId(Long studentId) { this.studentId = studentId; }
 
     public SleepSchedule getSleepSchedule() { return sleepSchedule; }
-    public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
+    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+        this.sleepSchedule = sleepSchedule;
+    }
 
     public int getStudyHoursPerDay() { return studyHoursPerDay; }
-    public void setStudyHoursPerDay(int studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
+    public void setStudyHoursPerDay(int studyHoursPerDay) {
+        this.studyHoursPerDay = studyHoursPerDay;
+    }
 
     public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+        this.cleanlinessLevel = cleanlinessLevel;
+    }
 
     public NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+        this.noiseTolerance = noiseTolerance;
+    }
 
     public SocialPreference getSocialPreference() { return socialPreference; }
-    public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
+    public void setSocialPreference(SocialPreference socialPreference) {
+        this.socialPreference = socialPreference;
+    }
 }
