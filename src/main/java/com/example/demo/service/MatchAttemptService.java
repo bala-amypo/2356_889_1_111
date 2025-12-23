@@ -3,11 +3,11 @@ package com.example.demo.service;
 import com.example.demo.model.CompatibilityScoreRecord;
 import java.util.List;
 
-public interface MatchService {
+public interface MatchAttemptService {
 
-    CompatibilityScoreRecord compute(Long studentAId, Long studentBId);
+    CompatibilityScoreRecord computeMatch(Long studentAId, Long studentBId);
 
-    List<CompatibilityScoreRecord> getMatchesFor(Long studentId);
+    List<CompatibilityScoreRecord> getMatchesForStudent(Long studentId);
 
-    CompatibilityScoreRecord getById(Long id);
+    CompatibilityScoreRecord getMatchById(Long id);
 }
