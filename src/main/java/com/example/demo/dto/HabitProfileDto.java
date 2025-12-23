@@ -1,20 +1,16 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.CleanlinessLevel;
-import com.example.demo.model.NoiseTolerance;
-import com.example.demo.model.SleepSchedule;
-import com.example.demo.model.SocialPreference;
+import com.example.demo.model.HabitProfile;
 
 public class HabitProfileDto {
 
     private Long studentId;
-    private SleepSchedule sleepSchedule;
-    private Integer studyHoursPerDay;
-    private CleanlinessLevel cleanlinessLevel;
-    private NoiseTolerance noiseTolerance;
-    private SocialPreference socialPreference;
 
-    public HabitProfileDto() {}
+    private HabitProfile.SleepSchedule sleepSchedule;
+    private Integer studyHoursPerDay;
+    private HabitProfile.CleanlinessLevel cleanlinessLevel;
+    private HabitProfile.NoiseTolerance noiseTolerance;
+    private HabitProfile.SocialPreference socialPreference;
 
     public Long getStudentId() {
         return studentId;
@@ -24,11 +20,11 @@ public class HabitProfileDto {
         this.studentId = studentId;
     }
 
-    public SleepSchedule getSleepSchedule() {
+    public HabitProfile.SleepSchedule getSleepSchedule() {
         return sleepSchedule;
     }
 
-    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+    public void setSleepSchedule(HabitProfile.SleepSchedule sleepSchedule) {
         this.sleepSchedule = sleepSchedule;
     }
 
@@ -40,27 +36,27 @@ public class HabitProfileDto {
         this.studyHoursPerDay = studyHoursPerDay;
     }
 
-    public CleanlinessLevel getCleanlinessLevel() {
+    public HabitProfile.CleanlinessLevel getCleanlinessLevel() {
         return cleanlinessLevel;
     }
 
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+    public void setCleanlinessLevel(HabitProfile.CleanlinessLevel cleanlinessLevel) {
         this.cleanlinessLevel = cleanlinessLevel;
     }
 
-    public NoiseTolerance getNoiseTolerance() {
+    public HabitProfile.NoiseTolerance getNoiseTolerance() {
         return noiseTolerance;
     }
 
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+    public void setNoiseTolerance(HabitProfile.NoiseTolerance noiseTolerance) {
         this.noiseTolerance = noiseTolerance;
     }
 
-    public SocialPreference getSocialPreference() {
+    public HabitProfile.SocialPreference getSocialPreference() {
         return socialPreference;
     }
 
-    public void setSocialPreference(SocialPreference socialPreference) {
+    public void setSocialPreference(HabitProfile.SocialPreference socialPreference) {
         this.socialPreference = socialPreference;
     }
 }
