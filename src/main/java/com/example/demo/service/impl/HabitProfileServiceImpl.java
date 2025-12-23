@@ -1,11 +1,10 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.HabitProfileService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class HabitProfileServiceImpl implements HabitProfileService {
@@ -17,17 +16,22 @@ public class HabitProfileServiceImpl implements HabitProfileService {
     }
 
     @Override
-    public HabitProfile createOrUpdateHabit(HabitProfile habit) {
-        return repo.save(habit);
+    public HabitProfile createOrUpdate(HabitProfileDto dto) {
+        HabitProfile profile = repo
+                .findByStudentId(dto.getStudentId())
+                .orElse(new HabitProfile());
+
+        profile.setStudentId(dto.getStudentId());
+        profile.setSleepSchedule(dto.getSleepSchedule());
+        profile.setCleanlinessLevel(dto.getCleanlinessLevel());
+        profile.setNoiseTolerance(dto.getNoiseTolerance());
+        profile.setSocialPreference(dto.getSocialPreference());
+
+        return repo.save(profile);
     }
 
     @Override
-    public HabitProfile getHabitByStudent(Long studentId) {
+    public HabitProfile getForStudent(Long studentId) {
         return repo.findByStudentId(studentId).orElse(null);
-    }
-
-    @Override
-    public List<HabitProfile> getAllHabitProfiles() {
-        return repo.findAll();
     }
 }
