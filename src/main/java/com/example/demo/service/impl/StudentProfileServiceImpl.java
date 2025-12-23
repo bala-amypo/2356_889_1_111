@@ -1,14 +1,11 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.repository.StudentProfileRepository;
-import com.example.demo.service.StudentProfileService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
-public class StudentProfileServiceImpl implements StudentProfileService {
+public class StudentProfileServiceImpl {
 
     private final StudentProfileRepository repo;
 
@@ -16,33 +13,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
         this.repo = repo;
     }
 
-    @Override
-    public StudentProfile createStudent(StudentProfile student) {
-        return repo.save(student);
-    }
-
-    @Override
-    public StudentProfile getStudentById(Long id) {
-        return repo.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<StudentProfile> getAllStudents() {
-        return repo.findAll();
-    }
-
-    @Override
-    public StudentProfile updateStudentStatus(Long id, boolean active) {
-        StudentProfile s = getStudentById(id);
-        if (s != null) {
-            s.setActive(active);
-            return repo.save(s);
-        }
-        return null;
-    }
-
-    @Override
-    public StudentProfile findByStudentId(String studentId) {
-        return repo.findByStudentId(studentId).orElse(null);
+    public StudentProfile getByStudentId(Long id) {
+        return repo.findByStudentId(id).orElse(null);
     }
 }
