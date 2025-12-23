@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.service.HabitProfileService;
 
 @RestController
-@RequestMapping("/habit-profile")
+@RequestMapping("/habits")
 public class HabitProfileController {
 
     private final HabitProfileService service;

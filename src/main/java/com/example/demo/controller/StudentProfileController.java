@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.dto.StudentProfileDto;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/students")
 public class StudentProfileController {
 
     private final StudentProfileService service;
@@ -17,24 +17,22 @@ public class StudentProfileController {
     }
 
     @PostMapping
-    public StudentProfile create(@RequestBody StudentProfile student) {
-        return service.createStudent(student);
+    public StudentProfile create(@RequestBody StudentProfileDto dto) {
+        return service.create(dto);
     }
 
     @GetMapping("/{id}")
     public StudentProfile get(@PathVariable Long id) {
-        return service.getStudentById(id);
+        return service.get(id);
     }
 
     @GetMapping
     public List<StudentProfile> getAll() {
-        return service.getAllStudents();
+        return service.getAll();
     }
 
-    @PutMapping("/{id}/status")
-    public StudentProfile updateStatus(
-            @PathVariable Long id,
-            @RequestParam boolean active) {
-        return service.updateStudentStatus(id, active);
+    @PutMapping("/{id}")
+    public StudentProfile update(@PathVariable Long id, @RequestBody StudentProfileDto dto) {
+        return service.update(id, dto);
     }
 }
