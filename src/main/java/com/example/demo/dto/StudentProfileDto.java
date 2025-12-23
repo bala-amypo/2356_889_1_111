@@ -2,60 +2,25 @@ package com.example.demo.dto;
 
 public class StudentProfileDto {
 
-    private String studentId;
-    private String fullName;
+    private String name;
     private String email;
-    private String department;
-    private Integer yearLevel;
-    private Boolean active;
 
-    public StudentProfileDto() {}
-
-    public String getStudentId() {
-        return studentId;
+    public StudentProfileDto() {
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public String getName() {
+        return name;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-    
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-    
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public Integer getYearLevel() {
-        return yearLevel;
-    }
-
-    public void setYearLevel(Integer yearLevel) {
-        this.yearLevel = yearLevel;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 }
