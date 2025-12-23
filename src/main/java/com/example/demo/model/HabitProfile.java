@@ -1,13 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class HabitProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private Long studentId;
@@ -15,7 +14,7 @@ public class HabitProfile {
     @Enumerated(EnumType.STRING)
     private SleepSchedule sleepSchedule;
 
-    private Integer studyHoursPerDay;
+    private int studyHoursPerDay;
 
     @Enumerated(EnumType.STRING)
     private CleanlinessLevel cleanlinessLevel;
@@ -26,15 +25,6 @@ public class HabitProfile {
     @Enumerated(EnumType.STRING)
     private SocialPreference socialPreference;
 
-    private LocalDateTime updatedAt;
-
-    /* ===== INNER ENUMS (TEST EXPECTS THIS) ===== */
-    public enum SleepSchedule { EARLY, REGULAR, LATE }
-    public enum CleanlinessLevel { LOW, MEDIUM, HIGH }
-    public enum NoiseTolerance { LOW, MEDIUM, HIGH }
-    public enum SocialPreference { INTROVERT, BALANCED, EXTROVERT }
-
-    /* ===== GETTERS / SETTERS ===== */
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -44,8 +34,8 @@ public class HabitProfile {
     public SleepSchedule getSleepSchedule() { return sleepSchedule; }
     public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
 
-    public Integer getStudyHoursPerDay() { return studyHoursPerDay; }
-    public void setStudyHoursPerDay(Integer studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
+    public int getStudyHoursPerDay() { return studyHoursPerDay; }
+    public void setStudyHoursPerDay(int studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
 
     public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
     public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
@@ -55,7 +45,4 @@ public class HabitProfile {
 
     public SocialPreference getSocialPreference() { return socialPreference; }
     public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
-
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
