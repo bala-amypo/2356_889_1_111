@@ -1,65 +1,35 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 @Entity
 public class HabitProfile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Long studentId;
+    private String sleepSchedule;
+    private String cleanlinessLevel;
+    private String noiseTolerance;
+    private String socialPreference;
 
-    @Enumerated(EnumType.STRING)
-    private SleepSchedule sleepSchedule;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @Enumerated(EnumType.STRING)
-    private CleanlinessLevel cleanlinessLevel;
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
 
-    @Enumerated(EnumType.STRING)
-    private NoiseTolerance noiseTolerance;
+    public String getSleepSchedule() { return sleepSchedule; }
+    public void setSleepSchedule(String sleepSchedule) { this.sleepSchedule = sleepSchedule; }
 
-    @Enumerated(EnumType.STRING)
-    private SocialPreference socialPreference;
+    public String getCleanlinessLevel() { return cleanlinessLevel; }
+    public void setCleanlinessLevel(String cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
 
-    public Long getStudentId() {
-        return studentId;
-    }
+    public String getNoiseTolerance() { return noiseTolerance; }
+    public void setNoiseTolerance(String noiseTolerance) { this.noiseTolerance = noiseTolerance; }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-
-    public SleepSchedule getSleepSchedule() {
-        return sleepSchedule;
-    }
-
-    public void setSleepSchedule(SleepSchedule sleepSchedule) {
-        this.sleepSchedule = sleepSchedule;
-    }
-
-    public CleanlinessLevel getCleanlinessLevel() {
-        return cleanlinessLevel;
-    }
-
-    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
-        this.cleanlinessLevel = cleanlinessLevel;
-    }
-
-    public NoiseTolerance getNoiseTolerance() {
-        return noiseTolerance;
-    }
-
-    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
-        this.noiseTolerance = noiseTolerance;
-    }
-
-    public SocialPreference getSocialPreference() {
-        return socialPreference;
-    }
-
-    public void setSocialPreference(SocialPreference socialPreference) {
-        this.socialPreference = socialPreference;
-    }
+    public String getSocialPreference() { return socialPreference; }
+    public void setSocialPreference(String socialPreference) { this.socialPreference = socialPreference; }
 }
