@@ -10,8 +10,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final Key key = Keys.hmacShaKeyFor(
-            "12345678901234567890123456789012".getBytes());
+    private final Key key =
+            Keys.hmacShaKeyFor("12345678901234567890123456789012".getBytes());
 
     public String generateToken(Long id, String username, String email, String role) {
         return Jwts.builder()
@@ -23,5 +23,23 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(key)
                 .compact();
+    }
+
+    public boolean isTokenValid(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String extractEmail(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("email", String.class);
     }
 }

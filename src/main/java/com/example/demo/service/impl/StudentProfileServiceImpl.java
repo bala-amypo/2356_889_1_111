@@ -1,9 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
-import com.example.demo.dto.StudentProfileDto;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.repository.StudentProfileRepository;
+import com.example.demo.service.StudentProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,56 +10,39 @@ import java.util.List;
 @Service
 public class StudentProfileServiceImpl implements StudentProfileService {
 
-    private final StudentProfileRepository repository;
+    private final StudentProfileRepository repo;
 
-    public StudentProfileServiceImpl(StudentProfileRepository repository) {
-        this.repository = repository;
+    public StudentProfileServiceImpl(StudentProfileRepository repo) {
+        this.repo = repo;
     }
 
     @Override
-    public StudentProfile create(StudentProfileDto dto) {
+    public StudentProfile createStudent(StudentProfile student) {
+        return repo.save(student);
+    }
 
-        if (dto.getYearLevel() != null && dto.getYearLevel() <= 0) {
-            throw new IllegalArgumentException("year must be positive");
+    @Override
+    public StudentProfile getStudentById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<StudentProfile> getAllStudents() {
+        return repo.findAll();
+    }
+
+    @Override
+    public StudentProfile updateStudentStatus(Long id, boolean active) {
+        StudentProfile s = getStudentById(id);
+        if (s != null) {
+            s.setActive(active);
+            return repo.save(s);
         }
-
-        repository.findByStudentId(dto.getStudentId())
-                .ifPresent(s -> {
-                    throw new IllegalArgumentException("studentId already exists");
-                });
-
-        StudentProfile s = new StudentProfile();
-        s.setStudentId(dto.getStudentId());
-        s.setFullName(dto.getFullName());
-        s.setEmail(dto.getEmail());
-        s.setDepartment(dto.getDepartment());
-        s.setYearLevel(dto.getYearLevel());
-        s.setActive(dto.getActive() == null ? true : dto.getActive());
-
-        return repository.save(s);
+        return null;
     }
 
     @Override
-    public StudentProfile update(Long id, StudentProfileDto dto) {
-        StudentProfile s = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
-
-        s.setFullName(dto.getFullName());
-        s.setDepartment(dto.getDepartment());
-        s.setYearLevel(dto.getYearLevel());
-        s.setActive(dto.getActive());
-
-        return repository.save(s);
-    }
-
-    @Override
-    public StudentProfile get(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
-    }
-
-    @Override
-    public List<StudentProfile> getAll() {
-        return repository.findAll();
+    public StudentProfile findByStudentId(String studentId) {
+        return repo.findByStudentId(studentId).orElse(null);
     }
 }

@@ -28,7 +28,7 @@ public class HabitProfile {
 
     private LocalDateTime updatedAt;
 
-    /* ===== INNER ENUMS (TEST EXPECTS THIS EXACTLY) ===== */
+    /* ===== INNER ENUMS (TEST EXPECTS THIS) ===== */
     public enum SleepSchedule { EARLY, REGULAR, LATE }
     public enum CleanlinessLevel { LOW, MEDIUM, HIGH }
     public enum NoiseTolerance { LOW, MEDIUM, HIGH }
