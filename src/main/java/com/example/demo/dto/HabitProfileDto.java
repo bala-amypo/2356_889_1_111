@@ -6,10 +6,10 @@ public class HabitProfileDto {
 
     private Long studentId;
     private HabitProfile.SleepSchedule sleepSchedule;
-    private Integer studyHoursPerDay;
     private HabitProfile.CleanlinessLevel cleanlinessLevel;
     private HabitProfile.NoiseTolerance noiseTolerance;
     private HabitProfile.SocialPreference socialPreference;
+    private int studyHoursPerDay;
 
     public Long getStudentId() { return studentId; }
     public void setStudentId(Long studentId) { this.studentId = studentId; }
@@ -17,11 +17,6 @@ public class HabitProfileDto {
     public HabitProfile.SleepSchedule getSleepSchedule() { return sleepSchedule; }
     public void setSleepSchedule(HabitProfile.SleepSchedule sleepSchedule) {
         this.sleepSchedule = sleepSchedule;
-    }
-
-    public Integer getStudyHoursPerDay() { return studyHoursPerDay; }
-    public void setStudyHoursPerDay(Integer studyHoursPerDay) {
-        this.studyHoursPerDay = studyHoursPerDay;
     }
 
     public HabitProfile.CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
@@ -37,5 +32,10 @@ public class HabitProfileDto {
     public HabitProfile.SocialPreference getSocialPreference() { return socialPreference; }
     public void setSocialPreference(HabitProfile.SocialPreference socialPreference) {
         this.socialPreference = socialPreference;
+    }
+
+    public int getStudyHoursPerDay() { return studyHoursPerDay; }
+    public void setStudyHoursPerDay(int studyHoursPerDay) {
+        this.studyHoursPerDay = studyHoursPerDay;
     }
 }
