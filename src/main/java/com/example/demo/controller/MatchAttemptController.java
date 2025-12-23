@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.CompatibilityScoreRecord;
+import com.example.demo.model.MatchAttemptRecord;
 import com.example.demo.service.MatchAttemptService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/match-attempts")
-@Tag(name = "Match Attempts")
+@RequestMapping("/api/matches")
 public class MatchAttemptController {
 
     private final MatchAttemptService service;
@@ -18,21 +16,18 @@ public class MatchAttemptController {
         this.service = service;
     }
 
-    @PostMapping("/{studentAId}/{studentBId}")
-    public CompatibilityScoreRecord compute(
-            @PathVariable Long studentAId,
-            @PathVariable Long studentBId) {
-        return service.computeMatch(studentAId, studentBId);
+    @PostMapping
+    public MatchAttemptRecord log(@RequestBody MatchAttemptRecord record) {
+        return service.logMatchAttempt(record);
     }
 
     @GetMapping("/student/{studentId}")
-    public List<CompatibilityScoreRecord> getForStudent(
-            @PathVariable Long studentId) {
-        return service.getMatchesForStudent(studentId);
+    public List<MatchAttemptRecord> getByStudent(@PathVariable Long studentId) {
+        return service.getAttemptsByStudent(studentId);
     }
 
     @GetMapping("/{id}")
-    public CompatibilityScoreRecord getById(@PathVariable Long id) {
-        return service.getMatchById(id);
+    public MatchAttemptRecord getById(@PathVariable Long id) {
+        return service.getAttemptById(id);
     }
 }
