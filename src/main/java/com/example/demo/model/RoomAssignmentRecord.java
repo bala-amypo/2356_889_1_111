@@ -1,30 +1,41 @@
-package com.example.demo.service.impl;
+package com.example.demo.model;
 
-import com.example.demo.model.MatchAttemptRecord;
-import com.example.demo.service.MatchAttemptService;
-import org.springframework.stereotype.Service;
+public class RoomAssignmentRecord {
 
-import java.util.ArrayList;
-import java.util.List;
+    private Long id;
+    private Long studentAId;
+    private Long studentBId;
+    private Status status;
 
-@Service
-public class MatchAttemptServiceImpl implements MatchAttemptService {
-
-    @Override
-    public MatchAttemptRecord computeMatch(Long initiatorStudentId, Long candidateStudentId) {
-        MatchAttemptRecord record = new MatchAttemptRecord();
-        record.setInitiatorStudentId(initiatorStudentId);
-        record.setCandidateStudentId(candidateStudentId);
-        return record;
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public List<MatchAttemptRecord> getMatchesForStudent(Long studentId) {
-        return new ArrayList<>();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Override
-    public MatchAttemptRecord getMatchById(Long id) {
-        return new MatchAttemptRecord();
+    public Long getStudentAId() {
+        return studentAId;
+    }
+
+    public void setStudentAId(Long studentAId) {
+        this.studentAId = studentAId;
+    }
+
+    public Long getStudentBId() {
+        return studentBId;
+    }
+
+    public void setStudentBId(Long studentBId) {
+        this.studentBId = studentBId;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
