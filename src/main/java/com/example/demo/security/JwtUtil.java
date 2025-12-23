@@ -12,4 +12,14 @@ public class JwtUtil {
     public String extractEmail(String token) {
         return "test@example.com";
     }
+
+   
+    public String generateToken(
+            long id,
+            String username,
+            String email,
+            String role
+    ) {
+        return "dummy-token";
+    }
 }
