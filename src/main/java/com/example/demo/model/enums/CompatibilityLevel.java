@@ -1,6 +1,6 @@
 package com.example.demo.model.enums;
 
-public enum CleanlinessLevel {
+public enum CompatibilityLevel {
     LOW,
     MEDIUM,
     HIGH

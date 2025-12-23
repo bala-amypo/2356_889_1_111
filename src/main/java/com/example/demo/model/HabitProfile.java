@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
+import com.example.demo.model.enums.*;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "habit_profile")
 public class HabitProfile {
 
     @Id
@@ -10,26 +12,64 @@ public class HabitProfile {
     private Long id;
 
     private Long studentId;
-    private String sleepSchedule;
-    private String cleanlinessLevel;
-    private String noiseTolerance;
-    private String socialPreference;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Enumerated(EnumType.STRING)
+    private SleepSchedule sleepSchedule;
 
-    public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
+    @Enumerated(EnumType.STRING)
+    private CleanlinessLevel cleanlinessLevel;
 
-    public String getSleepSchedule() { return sleepSchedule; }
-    public void setSleepSchedule(String sleepSchedule) { this.sleepSchedule = sleepSchedule; }
+    @Enumerated(EnumType.STRING)
+    private NoiseTolerance noiseTolerance;
 
-    public String getCleanlinessLevel() { return cleanlinessLevel; }
-    public void setCleanlinessLevel(String cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
+    @Enumerated(EnumType.STRING)
+    private SocialPreference socialPreference;
 
-    public String getNoiseTolerance() { return noiseTolerance; }
-    public void setNoiseTolerance(String noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSocialPreference() { return socialPreference; }
-    public void setSocialPreference(String socialPreference) { this.socialPreference = socialPreference; }
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public SleepSchedule getSleepSchedule() {
+        return sleepSchedule;
+    }
+
+    public CleanlinessLevel getCleanlinessLevel() {
+        return cleanlinessLevel;
+    }
+
+    public NoiseTolerance getNoiseTolerance() {
+        return noiseTolerance;
+    }
+
+    public SocialPreference getSocialPreference() {
+        return socialPreference;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setSleepSchedule(SleepSchedule sleepSchedule) {
+        this.sleepSchedule = sleepSchedule;
+    }
+
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+        this.cleanlinessLevel = cleanlinessLevel;
+    }
+
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) {
+        this.noiseTolerance = noiseTolerance;
+    }
+
+    public void setSocialPreference(SocialPreference socialPreference) {
+        this.socialPreference = socialPreference;
+    }
 }
