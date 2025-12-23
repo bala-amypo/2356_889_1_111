@@ -1,17 +1,20 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class StudentProfile {
 
     @Id
-    private Long studentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private Long studentId;
     private String name;
-    private String email;
-    private boolean active;
+    private Boolean active;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public Long getStudentId() { return studentId; }
     public void setStudentId(Long studentId) { this.studentId = studentId; }
@@ -19,9 +22,6 @@ public class StudentProfile {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public boolean getActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
