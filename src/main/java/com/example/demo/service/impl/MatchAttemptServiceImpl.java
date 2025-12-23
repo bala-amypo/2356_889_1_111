@@ -1,39 +1,30 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.MatchAttemptRecord;
-import com.example.demo.repository.MatchAttemptRecordRepository;
-import com.example.demo.repository.CompatibilityScoreRecordRepository;
 import com.example.demo.service.MatchAttemptService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Service   
+@Service
 public class MatchAttemptServiceImpl implements MatchAttemptService {
 
-    private final MatchAttemptRecordRepository repo;
-    private final CompatibilityScoreRecordRepository scoreRepo;
-
-    public MatchAttemptServiceImpl(
-            MatchAttemptRecordRepository repo,
-            CompatibilityScoreRecordRepository scoreRepo
-    ) {
-        this.repo = repo;
-        this.scoreRepo = scoreRepo;
+    @Override
+    public MatchAttemptRecord computeMatch(Long initiatorStudentId, Long candidateStudentId) {
+        MatchAttemptRecord record = new MatchAttemptRecord();
+        record.setInitiatorStudentId(initiatorStudentId);
+        record.setCandidateStudentId(candidateStudentId);
+        return record;
     }
 
     @Override
-    public MatchAttemptRecord logMatchAttempt(MatchAttemptRecord record) {
-        return repo.save(record);
+    public List<MatchAttemptRecord> getMatchesForStudent(Long studentId) {
+        return new ArrayList<>();
     }
 
     @Override
-    public List<MatchAttemptRecord> getAttemptsByStudent(Long studentId) {
-        return repo.findByInitiatorStudentIdOrCandidateStudentId(studentId, studentId);
-    }
-
-    @Override
-    public MatchAttemptRecord getAttemptById(Long id) {
-        return repo.findById(id).orElse(null);
+    public MatchAttemptRecord getMatchById(Long id) {
+        return new MatchAttemptRecord();
     }
 }

@@ -1,31 +1,30 @@
-package com.example.demo.model;
+package com.example.demo.service.impl;
 
-import jakarta.persistence.*;
+import com.example.demo.model.MatchAttemptRecord;
+import com.example.demo.service.MatchAttemptService;
+import org.springframework.stereotype.Service;
 
-@Entity
-public class RoomAssignmentRecord {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+@Service
+public class MatchAttemptServiceImpl implements MatchAttemptService {
 
-    private String roomNumber;
-    private Long studentAId;
-    private Long studentBId;
-    private String status;
+    @Override
+    public MatchAttemptRecord computeMatch(Long initiatorStudentId, Long candidateStudentId) {
+        MatchAttemptRecord record = new MatchAttemptRecord();
+        record.setInitiatorStudentId(initiatorStudentId);
+        record.setCandidateStudentId(candidateStudentId);
+        return record;
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Override
+    public List<MatchAttemptRecord> getMatchesForStudent(Long studentId) {
+        return new ArrayList<>();
+    }
 
-    public String getRoomNumber() { return roomNumber; }
-    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
-
-    public Long getStudentAId() { return studentAId; }
-    public void setStudentAId(Long studentAId) { this.studentAId = studentAId; }
-
-    public Long getStudentBId() { return studentBId; }
-    public void setStudentBId(Long studentBId) { this.studentBId = studentBId; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    @Override
+    public MatchAttemptRecord getMatchById(Long id) {
+        return new MatchAttemptRecord();
+    }
 }
