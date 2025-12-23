@@ -1,10 +1,20 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
+@Entity
 public class RoomAssignmentRecord {
 
+    @Id
     private Long id;
+
     private Long studentAId;
     private Long studentBId;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Long getId() {
