@@ -1,10 +1,8 @@
 package com.example.demo.model;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import java.time.LocalDateTime;
 
 @Entity
 public class CompatibilityScoreRecord {
@@ -14,48 +12,22 @@ public class CompatibilityScoreRecord {
 
     private Long studentAId;
     private Long studentBId;
-
-    @Enumerated(EnumType.STRING)
-    private CompatibilityLevel compatibilityLevel;
-
+    private int score;
     private LocalDateTime computedAt;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getStudentAId() { return studentAId; }
+    public void setStudentAId(Long studentAId) { this.studentAId = studentAId; }
 
-    public Long getStudentAId() {
-        return studentAId;
-    }
+    public Long getStudentBId() { return studentBId; }
+    public void setStudentBId(Long studentBId) { this.studentBId = studentBId; }
 
-    public void setStudentAId(Long studentAId) {
-        this.studentAId = studentAId;
-    }
+    public int getScore() { return score; }
+    public void setScore(int score) { this.score = score; }
 
-    public Long getStudentBId() {
-        return studentBId;
-    }
-
-    public void setStudentBId(Long studentBId) {
-        this.studentBId = studentBId;
-    }
-
-    public CompatibilityLevel getCompatibilityLevel() {
-        return compatibilityLevel;
-    }
-
-    public void setCompatibilityLevel(CompatibilityLevel compatibilityLevel) {
-        this.compatibilityLevel = compatibilityLevel;
-    }
-
-    public LocalDateTime getComputedAt() {
-        return computedAt;
-    }
-
+    public LocalDateTime getComputedAt() { return computedAt; }
     public void setComputedAt(LocalDateTime computedAt) {
         this.computedAt = computedAt;
     }
