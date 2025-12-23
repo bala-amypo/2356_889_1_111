@@ -1,53 +1,65 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
+
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.CompatibilityScoreRecord;
+import com.example.demo.repository.CompatibilityScoreRecordRepository;
+import com.example.demo.repository.HabitProfileRepository;
+import com.example.demo.repository.StudentProfileRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.MatchAttemptRecord;
-import com.example.demo.repository.CompatibilityScoreRecordRepository;
-import com.example.demo.repository.MatchAttemptRecordRepository;
-import com.example.demo.service.MatchAttemptService;
-
 @Service
-@Transactional
-public class MatchAttemptServiceImpl implements MatchAttemptService {
+public class MatchServiceImpl implements MatchService {
 
-    private final MatchAttemptRecordRepository attemptRepo;
+    private final StudentProfileRepository studentRepo;
+    private final HabitProfileRepository habitRepo;
     private final CompatibilityScoreRecordRepository scoreRepo;
 
-    public MatchAttemptServiceImpl(
-            MatchAttemptRecordRepository attemptRepo,
+    public MatchServiceImpl(
+            StudentProfileRepository studentRepo,
+            HabitProfileRepository habitRepo,
             CompatibilityScoreRecordRepository scoreRepo) {
-        this.attemptRepo = attemptRepo;
+        this.studentRepo = studentRepo;
+        this.habitRepo = habitRepo;
         this.scoreRepo = scoreRepo;
     }
 
     @Override
-    public MatchAttemptRecord logMatchAttempt(MatchAttemptRecord attempt) {
-        return attemptRepo.save(attempt);
+    public CompatibilityScoreRecord compute(Long studentAId, Long studentBId) {
+
+        studentRepo.findById(studentAId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+        studentRepo.findById(studentBId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+
+        habitRepo.findByStudentId(studentAId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
+        habitRepo.findByStudentId(studentBId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
+
+        double score = Math.abs(studentAId - studentBId) % 100;
+
+        CompatibilityScoreRecord r =
+                scoreRepo.findByStudentAIdAndStudentBId(studentAId, studentBId)
+                        .orElse(new CompatibilityScoreRecord());
+
+        r.setStudentAId(studentAId);
+        r.setStudentBId(studentBId);
+        r.setScore(score);
+        r.setCompatibilityLevel(score > 70 ? "HIGH" : "MEDIUM");
+
+        return scoreRepo.save(r);
     }
 
     @Override
-    public List<MatchAttemptRecord> getAttemptsByStudent(Long studentId) {
-        return attemptRepo.findByInitiatorStudentIdOrCandidateStudentId(studentId, studentId);
+    public List<CompatibilityScoreRecord> getMatchesFor(Long studentId) {
+        return scoreRepo.findByStudentAIdOrStudentBId(studentId, studentId);
     }
 
     @Override
-    public MatchAttemptRecord updateAttemptStatus(Long id, String status) {
-        MatchAttemptRecord a = attemptRepo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Match attempt not found"));
-
-        
-        a.setStatus(MatchAttemptRecord.Status.valueOf(status.toUpperCase()));
-
-        return attemptRepo.save(a);
-    }
-
-    @Override
-    public List<MatchAttemptRecord> getAllMatchAttempts() {
-        return attemptRepo.findAll();
+    public CompatibilityScoreRecord getById(Long id) {
+        return scoreRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
     }
 }
