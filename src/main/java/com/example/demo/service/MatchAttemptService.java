@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.model.CompatibilityScoreRecord;
+import com.example.demo.model.MatchAttemptRecord;
 import java.util.List;
 
 public interface MatchAttemptService {
 
-    CompatibilityScoreRecord computeMatch(Long studentAId, Long studentBId);
+    MatchAttemptRecord logMatchAttempt(MatchAttemptRecord record);
 
-    List<CompatibilityScoreRecord> getMatchesForStudent(Long studentId);
+    List<MatchAttemptRecord> getAttemptsByStudent(Long studentId);
 
-    CompatibilityScoreRecord getMatchById(Long id);
+    MatchAttemptRecord updateAttemptStatus(Long id, String status);
 }
