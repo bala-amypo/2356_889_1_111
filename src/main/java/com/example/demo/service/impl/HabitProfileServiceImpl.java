@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
-
 import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
@@ -10,29 +9,28 @@ import com.example.demo.service.HabitProfileService;
 @Service
 public class HabitProfileServiceImpl implements HabitProfileService {
 
-    private final HabitProfileRepository repository;
+    private final HabitProfileRepository repo;
 
-    public HabitProfileServiceImpl(HabitProfileRepository repository) {
-        this.repository = repository;
+    public HabitProfileServiceImpl(HabitProfileRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public HabitProfile createOrUpdate(HabitProfileDto dto) {
-        HabitProfile profile = repository
-                .findByStudentId(dto.getStudentId())
+        HabitProfile h = repo.findByStudentId(dto.getStudentId())
                 .orElse(new HabitProfile());
 
-        profile.setStudentId(dto.getStudentId());
-        profile.setSleepSchedule(dto.getSleepSchedule());
-        profile.setCleanlinessLevel(dto.getCleanlinessLevel());
-        profile.setNoiseTolerance(dto.getNoiseTolerance());
-        profile.setSocialPreference(dto.getSocialPreference());
+        h.setStudentId(dto.getStudentId());
+        h.setSleepSchedule(dto.getSleepSchedule());
+        h.setCleanlinessLevel(dto.getCleanlinessLevel());
+        h.setNoiseTolerance(dto.getNoiseTolerance());
+        h.setSocialPreference(dto.getSocialPreference());
 
-        return repository.save(profile);
+        return repo.save(h);
     }
 
     @Override
     public HabitProfile getForStudent(Long studentId) {
-        return repository.findByStudentId(studentId).orElse(null);
+        return repo.findByStudentId(studentId).orElse(null);
     }
 }

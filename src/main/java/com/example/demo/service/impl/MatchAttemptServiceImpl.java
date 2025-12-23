@@ -1,9 +1,8 @@
 package com.example.demo.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.example.demo.model.MatchAttemptRecord;
 import com.example.demo.repository.MatchAttemptRecordRepository;
 import com.example.demo.service.MatchAttemptService;
@@ -18,19 +17,18 @@ public class MatchAttemptServiceImpl implements MatchAttemptService {
     }
 
     @Override
-    public MatchAttemptRecord computeMatch(Long studentAId, Long studentBId) {
-        MatchAttemptRecord record = new MatchAttemptRecord();
-        record.setStudentId(studentAId);
-        record.setAttemptCount(1);
-        return repo.save(record);
+    public MatchAttemptRecord computeMatch(Long a, Long b) {
+        MatchAttemptRecord r = new MatchAttemptRecord();
+        r.setStudentAId(a);
+        r.setStudentBId(b);
+        r.setScore((int) (Math.random() * 100));
+        r.setAttemptedAt(LocalDateTime.now());
+        return repo.save(r);
     }
 
     @Override
-    public List<MatchAttemptRecord> getMatchesForStudent(Long studentId) {
-        return repo.findAll()
-                   .stream()
-                   .filter(r -> r.getStudentId().equals(studentId))
-                   .toList();
+    public List<MatchAttemptRecord> getMatchesForStudent(Long id) {
+        return repo.findByStudentAIdOrStudentBId(id, id);
     }
 
     @Override

@@ -1,13 +1,14 @@
 package com.example.demo.service.impl;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.stereotype.Service;
 import com.example.demo.model.RoomAssignmentRecord;
 import com.example.demo.repository.RoomAssignmentRecordRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.example.demo.service.RoomAssignmentService;
 
 @Service
-public class RoomAssignmentServiceImpl {
+public class RoomAssignmentServiceImpl implements RoomAssignmentService {
 
     private final RoomAssignmentRecordRepository repo;
 
@@ -15,15 +16,18 @@ public class RoomAssignmentServiceImpl {
         this.repo = repo;
     }
 
+    @Override
     public RoomAssignmentRecord assign(Long a, Long b) {
         RoomAssignmentRecord r = new RoomAssignmentRecord();
         r.setStudentAId(a);
         r.setStudentBId(b);
         r.setStatus("ASSIGNED");
+        r.setAssignedAt(LocalDateTime.now());
         return repo.save(r);
     }
 
-    public List<RoomAssignmentRecord> get(Long id) {
-        return repo.findByStudentAIdOrStudentBId(id, id);
+    @Override
+    public List<RoomAssignmentRecord> getAll() {
+        return repo.findAll();
     }
 }

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.MatchAttemptRecord;
 import java.util.List;
+import com.example.demo.model.MatchAttemptRecord;
 
 public interface MatchAttemptService {
 
@@ -10,4 +10,4 @@ public interface MatchAttemptService {
     List<MatchAttemptRecord> getMatchesForStudent(Long studentId);
 
     MatchAttemptRecord getMatchById(Long id);
-}
+}   
