@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class RoomAssignmentRecord {
@@ -13,42 +16,35 @@ public class RoomAssignmentRecord {
     private Long studentBId;
     private String status;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Long getStudentAId() { return studentAId; }
-    public void setStudentAId(Long studentAId) { this.studentAId = studentAId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getStudentBId() { return studentBId; }
-    public void setStudentBId(Long studentBId) { this.studentBId = studentBId; }
+    public Long getStudentAId() {
+        return studentAId;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-}
-package com.example.demo.model;
+    public void setStudentAId(Long studentAId) {
+        this.studentAId = studentAId;
+    }
 
-import jakarta.persistence.*;
+    public Long getStudentBId() {
+        return studentBId;
+    }
 
-@Entity
-public class RoomAssignmentRecord {
+    public void setStudentBId(Long studentBId) {
+        this.studentBId = studentBId;
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public String getStatus() {
+        return status;
+    }
 
-    private Long studentAId;
-    private Long studentBId;
-    private String status;
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Long getStudentAId() { return studentAId; }
-    public void setStudentAId(Long studentAId) { this.studentAId = studentAId; }
-
-    public Long getStudentBId() { return studentBId; }
-    public void setStudentBId(Long studentBId) { this.studentBId = studentBId; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
