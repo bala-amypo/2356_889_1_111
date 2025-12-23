@@ -1,41 +1,27 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.HabitProfile;
+import com.example.demo.model.*;
 
 public class HabitProfileDto {
 
     private Long studentId;
-    private HabitProfile.SleepSchedule sleepSchedule;
-    private HabitProfile.CleanlinessLevel cleanlinessLevel;
-    private HabitProfile.NoiseTolerance noiseTolerance;
-    private HabitProfile.SocialPreference socialPreference;
-    private int studyHoursPerDay;
+    private SleepSchedule sleepSchedule;
+    private CleanlinessLevel cleanlinessLevel;
+    private NoiseTolerance noiseTolerance;
+    private SocialPreference socialPreference;
 
     public Long getStudentId() { return studentId; }
     public void setStudentId(Long studentId) { this.studentId = studentId; }
 
-    public HabitProfile.SleepSchedule getSleepSchedule() { return sleepSchedule; }
-    public void setSleepSchedule(HabitProfile.SleepSchedule sleepSchedule) {
-        this.sleepSchedule = sleepSchedule;
-    }
+    public SleepSchedule getSleepSchedule() { return sleepSchedule; }
+    public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
 
-    public HabitProfile.CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
-    public void setCleanlinessLevel(HabitProfile.CleanlinessLevel cleanlinessLevel) {
-        this.cleanlinessLevel = cleanlinessLevel;
-    }
+    public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
 
-    public HabitProfile.NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
-    public void setNoiseTolerance(HabitProfile.NoiseTolerance noiseTolerance) {
-        this.noiseTolerance = noiseTolerance;
-    }
+    public NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) { this.noiseTolerance = noiseTolerance; }
 
-    public HabitProfile.SocialPreference getSocialPreference() { return socialPreference; }
-    public void setSocialPreference(HabitProfile.SocialPreference socialPreference) {
-        this.socialPreference = socialPreference;
-    }
-
-    public int getStudyHoursPerDay() { return studyHoursPerDay; }
-    public void setStudyHoursPerDay(int studyHoursPerDay) {
-        this.studyHoursPerDay = studyHoursPerDay;
-    }
+    public SocialPreference getSocialPreference() { return socialPreference; }
+    public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
 }

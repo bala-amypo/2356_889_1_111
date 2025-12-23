@@ -5,20 +5,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
-    public boolean validate(String token) {
-        return true;
-    }
-
-    
     public boolean isTokenValid(String token) {
-        return true;
+        return token != null && !token.isEmpty();
     }
 
     public String extractEmail(String token) {
-        return "test@mail.com";
-    }
-
-    public String generateToken(Long id, String u, String e, String r) {
-        return "dummy-token";
+        return "test@example.com";
     }
 }
