@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,39 +12,33 @@ import com.example.demo.service.StudentProfileService;
 @Service
 public class StudentProfileServiceImpl implements StudentProfileService {
 
-    private final StudentProfileRepository repo;
+    private final StudentProfileRepository repository;
 
-    public StudentProfileServiceImpl(StudentProfileRepository repo) {
-        this.repo = repo;
+    public StudentProfileServiceImpl(StudentProfileRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public StudentProfile create(StudentProfileDto dto) {
-        StudentProfile s = new StudentProfile();
-        s.setName(dto.getName());
-        s.setEmail(dto.getEmail());
-        s.setActive(true);
-        return repo.save(s);
+    public StudentProfile createProfile(StudentProfileDto dto) {
+        StudentProfile profile = new StudentProfile();
+        profile.setName(dto.getName());
+        profile.setEmail(dto.getEmail());
+        profile.setActive(true);
+        return repository.save(profile);
     }
 
     @Override
-    public StudentProfile get(Long id) {
-        return repo.findById(id).orElse(null);
+    public StudentProfile updateProfile(Long id, StudentProfileDto dto) {
+        StudentProfile profile = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("StudentProfile not found"));
+
+        profile.setName(dto.getName());
+        profile.setEmail(dto.getEmail());
+        return repository.save(profile);
     }
 
     @Override
-    public List<StudentProfile> getAll() {
-        return repo.findAll();
-    }
-
-    @Override
-    public StudentProfile update(Long id, StudentProfileDto dto) {
-        StudentProfile s = repo.findById(id).orElse(null);
-        if (s == null) {
-            return null;
-        }
-        s.setName(dto.getName());
-        s.setEmail(dto.getEmail());
-        return repo.save(s);
+    public Optional<StudentProfile> getProfileById(Long id) {
+        return repository.findById(id);
     }
 }
