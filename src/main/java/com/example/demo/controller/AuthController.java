@@ -9,14 +9,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    public AuthController() {}
-
     private final JwtUtil jwtUtil = new JwtUtil();
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest req) {
+
         String token = jwtUtil.generateToken(
-                1L, req.getUsername(), req.getEmail(), req.getRole());
-        return new AuthResponse(token, req.getRole());
+                1L,
+                req.getUsername(),
+                req.getEmail(),
+                req.getRole()
+        );
+
+        return new AuthResponse(
+                token,
+                1L,
+                req.getEmail(),
+                req.getRole()
+        );
     }
 }

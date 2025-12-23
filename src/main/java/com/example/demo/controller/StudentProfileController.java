@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.StudentProfileDto;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
-@Tag(name = "Student Profiles")
 public class StudentProfileController {
 
     private final StudentProfileService service;
@@ -20,24 +17,24 @@ public class StudentProfileController {
     }
 
     @PostMapping
-    public StudentProfile create(@RequestBody StudentProfileDto dto) {
-        return service.create(dto);
+    public StudentProfile create(@RequestBody StudentProfile student) {
+        return service.createStudent(student);
     }
 
     @GetMapping("/{id}")
-    public StudentProfile getById(@PathVariable Long id) {
-        return service.get(id);
+    public StudentProfile get(@PathVariable Long id) {
+        return service.getStudentById(id);
     }
 
     @GetMapping
     public List<StudentProfile> getAll() {
-        return service.getAll();
+        return service.getAllStudents();
     }
 
-    @PutMapping("/{id}")
-    public StudentProfile update(
+    @PutMapping("/{id}/status")
+    public StudentProfile updateStatus(
             @PathVariable Long id,
-            @RequestBody StudentProfileDto dto) {
-        return service.update(id, dto);
+            @RequestParam boolean active) {
+        return service.updateStudentStatus(id, active);
     }
 }
