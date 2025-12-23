@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.dto.StudentProfileDto;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
@@ -32,7 +34,8 @@ public class StudentProfileController {
     }
 
     @PutMapping("/{id}")
-    public StudentProfile update(@PathVariable Long id, @RequestBody StudentProfileDto dto) {
+    public StudentProfile update(@PathVariable Long id,
+                                 @RequestBody StudentProfileDto dto) {
         return service.update(id, dto);
     }
 }
