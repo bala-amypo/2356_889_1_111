@@ -4,6 +4,7 @@ public class HabitProfileDto {
 
     private Long studentId;
 
+    // ✅ ALL STRINGS (NO ENUMS)
     private String sleepSchedule;
     private String cleanlinessLevel;
     private String noiseTolerance;

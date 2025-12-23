@@ -1,45 +1,56 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "match_attempt_records")
+@Table(name = "match_attempts")
 public class MatchAttemptRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long studentId;
+    private Long studentAId;
+    private Long studentBId;
 
-    @Column(nullable = false)
-    private Integer attemptCount;
+    private int score;
 
-    public MatchAttemptRecord() {
-    }
+    private LocalDateTime attemptedAt;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getStudentAId() {
+        return studentAId;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public void setStudentAId(Long studentAId) {
+        this.studentAId = studentAId;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public Long getStudentBId() {
+        return studentBId;
     }
 
-    public Integer getAttemptCount() {
-        return attemptCount;
+    public void setStudentBId(Long studentBId) {
+        this.studentBId = studentBId;
     }
 
-    public void setAttemptCount(Integer attemptCount) {
-        this.attemptCount = attemptCount;
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public LocalDateTime getAttemptedAt() {
+        return attemptedAt;
+    }
+
+    public void setAttemptedAt(LocalDateTime attemptedAt) {
+        this.attemptedAt = attemptedAt;
     }
 }

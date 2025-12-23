@@ -1,36 +1,39 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.CompatibilityScoreRecord;
-import com.example.demo.repository.CompatibilityScoreRecordRepository;
-import com.example.demo.repository.HabitProfileRepository;
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.example.demo.model.CompatibilityScoreRecord;
+import com.example.demo.repository.CompatibilityScoreRecordRepository;
+import com.example.demo.service.CompatibilityScoreService;
 
 @Service
-public class CompatibilityScoreServiceImpl {
+public class CompatibilityScoreServiceImpl implements CompatibilityScoreService {
 
-    private final HabitProfileRepository habitRepo;
-    private final CompatibilityScoreRecordRepository scoreRepo;
+    private final CompatibilityScoreRecordRepository repo;
 
-    public CompatibilityScoreServiceImpl(HabitProfileRepository habitRepo,
-                                         CompatibilityScoreRecordRepository scoreRepo) {
-        this.habitRepo = habitRepo;
-        this.scoreRepo = scoreRepo;
+    public CompatibilityScoreServiceImpl(CompatibilityScoreRecordRepository repo) {
+        this.repo = repo;
     }
 
+    @Override
     public CompatibilityScoreRecord compute(Long a, Long b) {
+
+        double rawScore = Math.random() * 100;
+
+        // ✅ SAFE CONVERSION
+        int score = (int) Math.round(rawScore);
+
         CompatibilityScoreRecord record = new CompatibilityScoreRecord();
         record.setStudentAId(a);
         record.setStudentBId(b);
-        record.setScore(75.0);
-        record.setCompatibilityLevel("HIGH");
-        record.setComputedAt(LocalDateTime.now());
-        return scoreRepo.save(record);
-    }
+        record.setScore(score);
 
-    public List<CompatibilityScoreRecord> getForStudent(Long id) {
-        return scoreRepo.findByStudentAIdOrStudentBId(id, id);
+        // ✅ STRING VALUE
+        record.setCompatibilityLevel(score >= 70 ? "HIGH" : "LOW");
+        record.setComputedAt(LocalDateTime.now());
+
+        return repo.save(record);
     }
 }
