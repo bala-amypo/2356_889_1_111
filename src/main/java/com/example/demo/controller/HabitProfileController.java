@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.service.HabitProfileService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/habits")
+@RequestMapping("/habit-profile")
 public class HabitProfileController {
 
     private final HabitProfileService service;
@@ -17,16 +17,12 @@ public class HabitProfileController {
     }
 
     @PostMapping
-    public ResponseEntity<HabitProfile> createOrUpdate(
-            @RequestBody HabitProfileDto dto
-    ) {
-        return ResponseEntity.ok(service.createOrUpdate(dto));
+    public HabitProfile createOrUpdate(@RequestBody HabitProfileDto dto) {
+        return service.createOrUpdate(dto);
     }
 
-    @GetMapping("/student/{id}")
-    public ResponseEntity<HabitProfile> getForStudent(
-            @PathVariable Long id
-    ) {
-        return ResponseEntity.ok(service.getForStudent(id));
+    @GetMapping("/{studentId}")
+    public HabitProfile get(@PathVariable Long studentId) {
+        return service.getForStudent(studentId);
     }
 }

@@ -8,4 +8,4 @@ public interface HabitProfileService {
     HabitProfile createOrUpdate(HabitProfileDto dto);
 
     HabitProfile getForStudent(Long studentId);
-}
+}   

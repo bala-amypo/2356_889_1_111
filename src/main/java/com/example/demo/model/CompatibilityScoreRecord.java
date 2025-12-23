@@ -1,11 +1,10 @@
 package com.example.demo.model;
 
-import com.example.demo.model.enums.CompatibilityLevel;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "compatibility_score")
+@Table(name = "compatibility_scores")
 public class CompatibilityScoreRecord {
 
     @Id
@@ -14,10 +13,11 @@ public class CompatibilityScoreRecord {
 
     private Long studentAId;
     private Long studentBId;
+
     private int score;
 
-    @Enumerated(EnumType.STRING)
-    private CompatibilityLevel compatibilityLevel;
+    // ✅ STRING (NOT ENUM)
+    private String compatibilityLevel;
 
     private LocalDateTime computedAt;
 
@@ -29,40 +29,36 @@ public class CompatibilityScoreRecord {
         return studentAId;
     }
 
-    public Long getStudentBId() {
-        return studentBId;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public CompatibilityLevel getCompatibilityLevel() {
-        return compatibilityLevel;
-    }
-
-    public LocalDateTime getComputedAt() {
-        return computedAt;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setStudentAId(Long studentAId) {
         this.studentAId = studentAId;
+    }
+
+    public Long getStudentBId() {
+        return studentBId;
     }
 
     public void setStudentBId(Long studentBId) {
         this.studentBId = studentBId;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void setScore(int score) {
         this.score = score;
     }
 
-    public void setCompatibilityLevel(CompatibilityLevel compatibilityLevel) {
+    public String getCompatibilityLevel() {
+        return compatibilityLevel;
+    }
+
+    public void setCompatibilityLevel(String compatibilityLevel) {
         this.compatibilityLevel = compatibilityLevel;
+    }
+
+    public LocalDateTime getComputedAt() {
+        return computedAt;
     }
 
     public void setComputedAt(LocalDateTime computedAt) {
