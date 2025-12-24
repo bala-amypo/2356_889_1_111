@@ -18,38 +18,45 @@ public class HabitProfile {
     private Integer studyHoursPerDay;
 
     @Enumerated(EnumType.STRING)
-    private Level cleanlinessLevel;
+    private CleanlinessLevel cleanlinessLevel;
 
     @Enumerated(EnumType.STRING)
-    private Level noiseTolerance;
+    private NoiseTolerance noiseTolerance;
 
     @Enumerated(EnumType.STRING)
     private SocialPreference socialPreference;
 
     private LocalDateTime updatedAt;
 
+    public HabitProfile() {}
+
     @PrePersist
     @PreUpdate
-    public void onUpdate() {
+    public void updateTime() {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public enum SleepSchedule { EARLY, REGULAR, LATE }
-    public enum Level { LOW, MEDIUM, HIGH }
-    public enum SocialPreference { INTROVERT, BALANCED, EXTROVERT }
-
-    // getters & setters
+   
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public Long getStudentId() { return studentId; }
     public void setStudentId(Long studentId) { this.studentId = studentId; }
-    public Integer getStudyHoursPerDay() { return studyHoursPerDay; }
-    public void setStudyHoursPerDay(Integer studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
+
     public SleepSchedule getSleepSchedule() { return sleepSchedule; }
     public void setSleepSchedule(SleepSchedule sleepSchedule) { this.sleepSchedule = sleepSchedule; }
-    public Level getCleanlinessLevel() { return cleanlinessLevel; }
-    public void setCleanlinessLevel(Level cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
-    public Level getNoiseTolerance() { return noiseTolerance; }
-    public void setNoiseTolerance(Level noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+
+    public Integer getStudyHoursPerDay() { return studyHoursPerDay; }
+    public void setStudyHoursPerDay(Integer studyHoursPerDay) { this.studyHoursPerDay = studyHoursPerDay; }
+
+    public CleanlinessLevel getCleanlinessLevel() { return cleanlinessLevel; }
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) { this.cleanlinessLevel = cleanlinessLevel; }
+
+    public NoiseTolerance getNoiseTolerance() { return noiseTolerance; }
+    public void setNoiseTolerance(NoiseTolerance noiseTolerance) { this.noiseTolerance = noiseTolerance; }
+
     public SocialPreference getSocialPreference() { return socialPreference; }
     public void setSocialPreference(SocialPreference socialPreference) { this.socialPreference = socialPreference; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
 }
