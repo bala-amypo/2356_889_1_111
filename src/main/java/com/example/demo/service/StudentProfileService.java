@@ -1,17 +1,42 @@
 package com.example.demo.service;
 
+import com.example.demo.model.StudentProfile;
+import com.example.demo.repository.StudentProfileRepository;
+import com.example.demo.exception.ResourceNotFoundException;
 import java.util.List;
 
-import com.example.demo.dto.StudentProfileDto;
-import com.example.demo.model.StudentProfile;
+public class StudentProfileService {
 
-public interface StudentProfileService {
+    private final StudentProfileRepository repo;
 
-    StudentProfile create(StudentProfileDto dto);
+    public StudentProfileService(StudentProfileRepository repo) {
+        this.repo = repo;
+    }
 
-    StudentProfile get(Long id);
+    public StudentProfile createStudent(StudentProfile profile) {
+        if (repo.findByStudentId(profile.getStudentId()).isPresent()) {
+            throw new IllegalArgumentException("studentId exists");
+        }
+        return repo.save(profile);
+    }
 
-    List<StudentProfile> getAll();
+    public StudentProfile getStudentById(Long id) {
+        return repo.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("not found"));
+    }
 
-    StudentProfile update(Long id, StudentProfileDto dto);
+    public List<StudentProfile> getAllStudents() {
+        return repo.findAll();
+    }
+
+    public StudentProfile findByStudentId(String studentId) {
+        return repo.findByStudentId(studentId).orElseThrow(() ->
+                new ResourceNotFoundException("not found"));
+    }
+
+    public StudentProfile updateStudentStatus(Long id, boolean active) {
+        StudentProfile sp = getStudentById(id);
+        sp.setActive(active);
+        return repo.save(sp);
+    }
 }
