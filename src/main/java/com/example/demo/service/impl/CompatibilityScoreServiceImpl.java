@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.CompatibilityLevel;
 import com.example.demo.model.CompatibilityScoreRecord;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.CompatibilityScoreRecordRepository;
@@ -35,20 +36,24 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
         HabitProfile h2 = habitRepo.findByStudentId(b)
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
 
-        double score = 100 - Math.abs(h1.getStudyHoursPerDay() - h2.getStudyHoursPerDay()) * 5;
+        double score = 100 - Math.abs(
+                h1.getStudyHoursPerDay() - h2.getStudyHoursPerDay()) * 5;
         score = Math.max(0, Math.min(100, score));
 
         CompatibilityScoreRecord r = new CompatibilityScoreRecord();
         r.setStudentAId(a);
         r.setStudentBId(b);
         r.setScore(score);
-        r.setCompatibilityLevel(
-                score >= 80 ? "EXCELLENT" :
-                score >= 60 ? "HIGH" :
-                score >= 40 ? "MEDIUM" : "LOW"
-        );
-        r.setDetailsJson("{}");
 
+        
+        r.setCompatibilityLevel(
+                score >= 80 ? CompatibilityLevel.EXCELLENT :
+                score >= 60 ? CompatibilityLevel.HIGH :
+                score >= 40 ? CompatibilityLevel.MEDIUM :
+                              CompatibilityLevel.LOW
+        );
+
+        r.setDetailsJson("{}");
         return scoreRepo.save(r);
     }
 

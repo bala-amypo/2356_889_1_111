@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.AssignmentStatus;
 import com.example.demo.model.RoomAssignmentRecord;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.repository.RoomAssignmentRecordRepository;
@@ -57,7 +58,9 @@ public class RoomAssignmentServiceImpl implements RoomAssignmentService {
     @Override
     public RoomAssignmentRecord updateStatus(Long id, String status) {
         RoomAssignmentRecord r = getAssignmentById(id);
-        r.setStatus(status);
+
+  
+        r.setStatus(AssignmentStatus.valueOf(status));
         return repo.save(r);
     }
 }

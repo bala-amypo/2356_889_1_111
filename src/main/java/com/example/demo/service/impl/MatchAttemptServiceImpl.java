@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.AttemptStatus;
 import com.example.demo.model.MatchAttemptRecord;
 import com.example.demo.repository.CompatibilityScoreRecordRepository;
 import com.example.demo.repository.MatchAttemptRecordRepository;
@@ -36,7 +37,8 @@ public class MatchAttemptServiceImpl implements MatchAttemptService {
     public MatchAttemptRecord updateAttemptStatus(Long id, String status) {
         MatchAttemptRecord r = repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
-        r.setStatus(status);
+
+        r.setStatus(AttemptStatus.valueOf(status));
         return repo.save(r);
     }
 

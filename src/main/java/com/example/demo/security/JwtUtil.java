@@ -10,8 +10,9 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "amypo_secret_key";
+    private static final String SECRET = "amypo_secret_key";
 
+   
     public String generateToken(
             String email,
             String role,
@@ -32,12 +33,25 @@ public class JwtUtil {
                 .compact();
     }
 
-    public boolean validate(String token) {
+   
+    public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            getClaims(token);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+   
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
