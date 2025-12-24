@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.HabitProfileService;
@@ -20,24 +19,27 @@ public class HabitProfileServiceImpl implements HabitProfileService {
     @Override
     public HabitProfile createOrUpdateHabit(HabitProfile habit) {
         if (habit.getStudyHoursPerDay() < 0) {
-            throw new IllegalArgumentException("study hours");
+            throw new RuntimeException("Invalid study hours");
         }
         return repo.save(habit);
     }
 
     @Override
     public HabitProfile getHabitByStudent(Long studentId) {
-        HabitProfile h = repo.findByStudentId(studentId);
-        if (h == null) {
-            throw new ResourceNotFoundException("not found");
+        HabitProfile habit = repo.findByStudentId(studentId);
+        if (habit == null) {
+            throw new RuntimeException("Not found");
         }
-        return h;
+        return habit;
     }
 
     @Override
     public HabitProfile getHabitById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+        HabitProfile habit = repo.findById(id);
+        if (habit == null) {
+            throw new RuntimeException("Not found");
+        }
+        return habit;
     }
 
     @Override
