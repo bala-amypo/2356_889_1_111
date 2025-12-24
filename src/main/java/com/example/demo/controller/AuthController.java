@@ -18,23 +18,17 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthResponse register(@RequestBody AuthRequest req) {
-
         String email = req.getEmail();
-        String role = Role.USER.name();   // AMYPO expects role in token
-
+        String role = Role.USER.name();
         String token = jwtUtil.generateToken(email, role);
-
         return new AuthResponse(token, email, role);
     }
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest req) {
-
         String email = req.getEmail();
         String role = Role.USER.name();
-
         String token = jwtUtil.generateToken(email, role);
-
         return new AuthResponse(token, email, role);
     }
 }
