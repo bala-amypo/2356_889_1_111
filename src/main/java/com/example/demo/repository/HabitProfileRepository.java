@@ -1,8 +1,15 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.HabitProfile;
-import java.util.Optional;
+import java.util.List;
 
 public interface HabitProfileRepository {
-    Optional<HabitProfile> findById(Long id);
+
+    HabitProfile save(HabitProfile habitProfile);
+
+    HabitProfile findByStudentId(Long studentId);
+
+    HabitProfile findById(Long id);  
+
+    List<HabitProfile> findAll();
 }
