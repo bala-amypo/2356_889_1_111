@@ -35,11 +35,9 @@ public class HabitProfileServiceImpl implements HabitProfileService {
 
     @Override
     public HabitProfile getHabitById(Long id) {
-        HabitProfile habit = repo.findById(id);
-        if (habit == null) {
-            throw new RuntimeException("Not found");
-        }
-        return habit;
+       
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
     }
 
     @Override
