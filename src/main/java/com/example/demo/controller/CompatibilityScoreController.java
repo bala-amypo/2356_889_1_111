@@ -2,10 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.CompatibilityScoreRecord;
 import com.example.demo.service.CompatibilityScoreService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
-@RestController
-@RequestMapping("/scores")
 public class CompatibilityScoreController {
 
     private final CompatibilityScoreService service;
@@ -14,8 +12,7 @@ public class CompatibilityScoreController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public CompatibilityScoreRecord get(@PathVariable Long id) {
-        return service.getScore(id);
+    public ResponseEntity<CompatibilityScoreRecord> compute(Long a, Long b) {
+        return ResponseEntity.ok(service.computeScore(a, b));
     }
 }
