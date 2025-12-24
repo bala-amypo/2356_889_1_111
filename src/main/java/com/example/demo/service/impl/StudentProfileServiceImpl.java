@@ -13,7 +13,6 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     private final StudentProfileRepository repo;
 
-    
     public StudentProfileServiceImpl(StudentProfileRepository repo) {
         this.repo = repo;
     }
@@ -38,12 +37,13 @@ public class StudentProfileServiceImpl implements StudentProfileService {
         return repo.findAll();
     }
 
+   
     @Override
-    public StudentProfile deactivateProfile(Long id) {
-        StudentProfile p = repo.findById(id).orElse(null);
-        if (p != null) {
-            p.setActive(false);
-            return repo.save(p);
+    public StudentProfile updateStudentStatus(Long id, boolean active) {
+        StudentProfile profile = repo.findById(id).orElse(null);
+        if (profile != null) {
+            profile.setActive(active);
+            return repo.save(profile);
         }
         return null;
     }
