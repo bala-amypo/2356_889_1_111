@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.AuthResponse;
 import com.example.demo.security.JwtUtil;
+import com.example.demo.security.Role;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,13 +18,23 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthResponse register(@RequestBody AuthRequest req) {
-        String token = jwtUtil.generateToken(req.getUsername(), req.getRole());
-        return new AuthResponse(token);
+
+        String email = req.getEmail();
+        String role = Role.USER.name();   // AMYPO expects role in token
+
+        String token = jwtUtil.generateToken(email, role);
+
+        return new AuthResponse(token, email, role);
     }
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest req) {
-        String token = jwtUtil.generateToken(req.getUsername(), req.getRole());
-        return new AuthResponse(token);
+
+        String email = req.getEmail();
+        String role = Role.USER.name();
+
+        String token = jwtUtil.generateToken(email, role);
+
+        return new AuthResponse(token, email, role);
     }
 }
