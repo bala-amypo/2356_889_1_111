@@ -1,43 +1,26 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
 import com.example.demo.security.JwtUtil;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
-@RestController
-@RequestMapping("/auth")
+import java.util.HashMap;
+import java.util.Map;
+
 public class AuthController {
 
     private final JwtUtil jwtUtil;
+    private final Map<String, String> users = new HashMap<>();
 
     public AuthController(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/register")
-    public AuthResponse register(@RequestBody AuthRequest request) {
-
-        String token = jwtUtil.generateToken(
-                request.getUsername(),
-                request.getRole(),
-                request.getEmail(),
-                "1"
-        );
-
-        return new AuthResponse(token, 200, "SUCCESS");
-    }
-
-    @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
-
-        String token = jwtUtil.generateToken(
-                request.getUsername(),
-                request.getRole(),
-                request.getEmail(),
-                "1"
-        );
-
-        return new AuthResponse(token, 200, "SUCCESS");
+    public ResponseEntity<?> register(AuthRequest req) {
+        if (users.containsKey(req.getUsername())) {
+            return ResponseEntity.badRequest().build();
+        }
+        users.put(req.getUsername(), req.getPassword());
+        return ResponseEntity.ok("registered");
     }
 }
