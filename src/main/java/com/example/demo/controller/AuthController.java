@@ -16,17 +16,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody AuthRequest r) {
-        return new AuthResponse(
-                jwtUtil.generateToken(1L, r.getUsername(), r.getEmail(), r.getRole()),
-                1L,
-                r.getUsername(),
-                r.getRole()
-        );
+    public AuthResponse register(@RequestBody AuthRequest req) {
+        String token = jwtUtil.generateToken(req.getUsername(), req.getRole());
+        return new AuthResponse(token);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest r) {
-        return register(r);
+    public AuthResponse login(@RequestBody AuthRequest req) {
+        String token = jwtUtil.generateToken(req.getUsername(), req.getRole());
+        return new AuthResponse(token);
     }
 }

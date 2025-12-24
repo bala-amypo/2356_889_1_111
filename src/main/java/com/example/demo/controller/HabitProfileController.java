@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.service.HabitProfileService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/habits")
+@RequestMapping("/api/habits")
 public class HabitProfileController {
 
     private final HabitProfileService service;
@@ -16,12 +17,22 @@ public class HabitProfileController {
     }
 
     @PostMapping
-    public HabitProfile createOrUpdate(@RequestBody HabitProfileDto dto) {
-        return service.createOrUpdate(dto);
+    public HabitProfile save(@RequestBody HabitProfile habit) {
+        return service.createOrUpdateHabit(habit);
     }
 
-    @GetMapping("/{studentId}")
-    public HabitProfile get(@PathVariable Long studentId) {
-        return service.getForStudent(studentId);
+    @GetMapping("/student/{studentId}")
+    public HabitProfile getByStudent(@PathVariable Long studentId) {
+        return service.getHabitByStudent(studentId);
+    }
+
+    @GetMapping("/{id}")
+    public HabitProfile getById(@PathVariable Long id) {
+        return service.getHabitById(id);
+    }
+
+    @GetMapping
+    public List<HabitProfile> getAll() {
+        return service.getAllHabitProfiles();
     }
 }

@@ -3,9 +3,8 @@ package com.example.demo.dto;
 public class HabitProfileDto {
 
     private Long studentId;
-
-    // ✅ ALL STRINGS (NO ENUMS)
     private String sleepSchedule;
+    private Integer studyHoursPerDay;
     private String cleanlinessLevel;
     private String noiseTolerance;
     private String socialPreference;
@@ -24,6 +23,14 @@ public class HabitProfileDto {
 
     public void setSleepSchedule(String sleepSchedule) {
         this.sleepSchedule = sleepSchedule;
+    }
+
+    public Integer getStudyHoursPerDay() {
+        return studyHoursPerDay;
+    }
+
+    public void setStudyHoursPerDay(Integer studyHoursPerDay) {
+        this.studyHoursPerDay = studyHoursPerDay;
     }
 
     public String getCleanlinessLevel() {
