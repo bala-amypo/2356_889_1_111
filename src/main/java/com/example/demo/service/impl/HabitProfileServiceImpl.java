@@ -3,11 +3,12 @@ package com.example.demo.service.impl;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.HabitProfileService;
-import org.springframework.stereotype.Service;
+import com.example.demo.exception.ResourceNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
-@Service
 public class HabitProfileServiceImpl implements HabitProfileService {
 
     private final HabitProfileRepository repo;
@@ -18,26 +19,35 @@ public class HabitProfileServiceImpl implements HabitProfileService {
 
     @Override
     public HabitProfile createOrUpdateHabit(HabitProfile habit) {
-        if (habit.getStudyHoursPerDay() < 0) {
-            throw new RuntimeException("Invalid study hours");
+        if (habit.getStudyHoursPerDay() != null && habit.getStudyHoursPerDay() < 0) {
+            throw new IllegalArgumentException("study hours invalid");
         }
+
+        Optional<HabitProfile> existing = repo.findByStudentId(habit.getStudentId());
+        if (existing.isPresent()) {
+            HabitProfile h = existing.get();
+            h.setStudyHoursPerDay(habit.getStudyHoursPerDay());
+            h.setSleepSchedule(habit.getSleepSchedule());
+            h.setCleanlinessLevel(habit.getCleanlinessLevel());
+            h.setNoiseTolerance(habit.getNoiseTolerance());
+            h.setSocialPreference(habit.getSocialPreference());
+            h.setUpdatedAt(LocalDateTime.now());
+            return repo.save(h);
+        }
+
+        habit.setUpdatedAt(LocalDateTime.now());
         return repo.save(habit);
     }
 
     @Override
     public HabitProfile getHabitByStudent(Long studentId) {
-        HabitProfile habit = repo.findByStudentId(studentId);
-        if (habit == null) {
-            throw new RuntimeException("Not found");
-        }
-        return habit;
+        return repo.findByStudentId(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("habit not found"));
     }
 
     @Override
-    public HabitProfile getHabitById(Long id) {
-       
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found"));
+    public Optional<HabitProfile> getHabitById(Long id) {
+        return repo.findById(id);
     }
 
     @Override
