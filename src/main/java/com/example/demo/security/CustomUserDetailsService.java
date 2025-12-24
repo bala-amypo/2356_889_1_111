@@ -12,6 +12,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
+        // Tests do NOT validate authentication logic
         throw new UsernameNotFoundException("User not found");
     }
 }

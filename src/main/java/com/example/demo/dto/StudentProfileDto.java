@@ -9,6 +9,9 @@ public class StudentProfileDto {
     private Integer yearLevel;
     private Boolean active;
 
+    public StudentProfileDto() {
+    }
+
     public String getStudentId() {
         return studentId;
     }
