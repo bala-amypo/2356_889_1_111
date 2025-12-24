@@ -29,6 +29,7 @@ public class RoomAssignmentServiceImpl implements RoomAssignmentService {
 
         StudentProfile a = studentRepo.findById(record.getStudentAId())
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
+
         StudentProfile b = studentRepo.findById(record.getStudentBId())
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
 
@@ -58,8 +59,6 @@ public class RoomAssignmentServiceImpl implements RoomAssignmentService {
     @Override
     public RoomAssignmentRecord updateStatus(Long id, String status) {
         RoomAssignmentRecord r = getAssignmentById(id);
-
-  
         r.setStatus(AssignmentStatus.valueOf(status));
         return repo.save(r);
     }

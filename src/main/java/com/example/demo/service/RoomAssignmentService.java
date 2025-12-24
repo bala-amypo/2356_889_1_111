@@ -1,43 +1,17 @@
-package com.example.demo.model;
+package com.example.demo.service;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import com.example.demo.model.RoomAssignmentRecord;
+import java.util.List;
 
-@Entity
-public class RoomAssignmentRecord {
+public interface RoomAssignmentService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    RoomAssignmentRecord assignRoom(RoomAssignmentRecord record);
 
-    private String roomNumber;
-    private Long studentAId;
-    private Long studentBId;
+    RoomAssignmentRecord getAssignmentById(Long id);
 
-    @Enumerated(EnumType.STRING)
-    private AssignmentStatus status;
+    List<RoomAssignmentRecord> getAssignmentsByStudent(Long studentId);
 
-    private LocalDateTime assignedAt;
+    List<RoomAssignmentRecord> getAllAssignments();
 
-    public RoomAssignmentRecord() {}
-
-    @PrePersist
-    public void assignTime() {
-        this.assignedAt = LocalDateTime.now();
-    }
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    // ✅ REQUIRED BY SERVICES & TESTS
-    public Long getStudentAId() {
-        return studentAId;
-    }
-
-    public Long getStudentBId() {
-        return studentBId;
-    }
-
-    public AssignmentStatus getStatus() { return status; }
-    public void setStatus(AssignmentStatus status) { this.status = status; }
+    RoomAssignmentRecord updateStatus(Long id, String status);
 }
