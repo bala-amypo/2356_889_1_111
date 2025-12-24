@@ -17,24 +17,23 @@ public class MatchAttemptController {
     }
 
     @PostMapping
-    public MatchAttemptRecord log(@RequestBody MatchAttemptRecord r) {
-        return service.logMatchAttempt(r);
+    public MatchAttemptRecord log(@RequestBody MatchAttemptRecord record) {
+        return service.logMatchAttempt(record);
     }
 
     @PutMapping("/{id}/status")
-    public MatchAttemptRecord update(@PathVariable Long id,
-                                     @RequestParam String status) {
+    public MatchAttemptRecord updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+
         return service.updateAttemptStatus(id, status);
     }
 
-    @GetMapping("/student/{id}")
-    public List<MatchAttemptRecord> byStudent(@PathVariable Long id) {
-        return service.getAttemptsByStudent(id);
-    }
+    @GetMapping("/student/{studentId}")
+    public List<MatchAttemptRecord> getByStudent(
+            @PathVariable Long studentId) {
 
-    @GetMapping("/{id}")
-    public MatchAttemptRecord get(@PathVariable Long id) {
-        return service.updateAttemptStatus(id, "PENDING_REVIEW");
+        return service.getAttemptsByStudent(studentId);
     }
 
     @GetMapping

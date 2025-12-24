@@ -17,12 +17,12 @@ public class StudentProfileController {
     }
 
     @PostMapping
-    public StudentProfile create(@RequestBody StudentProfile p) {
-        return service.createStudent(p);
+    public StudentProfile create(@RequestBody StudentProfile profile) {
+        return service.createStudent(profile);
     }
 
     @GetMapping("/{id}")
-    public StudentProfile get(@PathVariable Long id) {
+    public StudentProfile getById(@PathVariable Long id) {
         return service.getStudentById(id);
     }
 
@@ -32,12 +32,17 @@ public class StudentProfileController {
     }
 
     @PutMapping("/{id}/status")
-    public StudentProfile update(@PathVariable Long id, @RequestParam boolean active) {
+    public StudentProfile updateStatus(
+            @PathVariable Long id,
+            @RequestParam boolean active) {
+
         return service.updateStudentStatus(id, active);
     }
 
     @GetMapping("/lookup/{studentId}")
-    public StudentProfile lookup(@PathVariable String studentId) {
+    public StudentProfile getByStudentId(
+            @PathVariable String studentId) {
+
         return service.findByStudentId(studentId);
     }
 }

@@ -17,24 +17,28 @@ public class RoomAssignmentController {
     }
 
     @PostMapping
-    public RoomAssignmentRecord assign(@RequestBody RoomAssignmentRecord r) {
-        return service.assignRoom(r);
+    public RoomAssignmentRecord assign(@RequestBody RoomAssignmentRecord record) {
+        return service.assignRoom(record);
     }
 
     @PutMapping("/{id}/status")
-    public RoomAssignmentRecord update(@PathVariable Long id,
-                                       @RequestParam String status) {
+    public RoomAssignmentRecord updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+
         return service.updateStatus(id, status);
     }
 
-    @GetMapping("/student/{id}")
-    public List<RoomAssignmentRecord> byStudent(@PathVariable Long id) {
-        return service.getAssignmentsByStudent(id);
+    @GetMapping("/{id}")
+    public RoomAssignmentRecord getById(@PathVariable Long id) {
+        return service.getAssignmentById(id);
     }
 
-    @GetMapping("/{id}")
-    public RoomAssignmentRecord get(@PathVariable Long id) {
-        return service.getAssignmentById(id);
+    @GetMapping("/student/{studentId}")
+    public List<RoomAssignmentRecord> getByStudent(
+            @PathVariable Long studentId) {
+
+        return service.getAssignmentsByStudent(studentId);
     }
 
     @GetMapping

@@ -20,17 +20,20 @@ public class CompatibilityScoreController {
     public CompatibilityScoreRecord compute(
             @PathVariable Long a,
             @PathVariable Long b) {
+
         return service.computeScore(a, b);
     }
 
-    @GetMapping("/student/{id}")
-    public List<CompatibilityScoreRecord> getByStudent(@PathVariable Long id) {
-        return service.getScoresForStudent(id);
+    @GetMapping("/{id}")
+    public CompatibilityScoreRecord getById(@PathVariable Long id) {
+        return service.getScoreById(id);
     }
 
-    @GetMapping("/{id}")
-    public CompatibilityScoreRecord get(@PathVariable Long id) {
-        return service.getScoreById(id);
+    @GetMapping("/student/{studentId}")
+    public List<CompatibilityScoreRecord> getByStudent(
+            @PathVariable Long studentId) {
+
+        return service.getScoresForStudent(studentId);
     }
 
     @GetMapping
