@@ -19,17 +19,29 @@ public class MatchAttemptRecord {
 
     private LocalDateTime attemptedAt;
 
-    public MatchAttemptRecord() {}
-
-    @PrePersist
-    public void attemptTime() {
-        this.attemptedAt = LocalDateTime.now();
-    }
-
-    // REQUIRED BY TESTS
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
+    public Long getInitiatorStudentId() { return initiatorStudentId; }
+    public void setInitiatorStudentId(Long initiatorStudentId) {
+        this.initiatorStudentId = initiatorStudentId;
+    }
+
+    public Long getCandidateStudentId() { return candidateStudentId; }
+    public void setCandidateStudentId(Long candidateStudentId) {
+        this.candidateStudentId = candidateStudentId;
+    }
+
+    public Long getResultScoreId() { return resultScoreId; }
+    public void setResultScoreId(Long resultScoreId) {
+        this.resultScoreId = resultScoreId;
+    }
+
     public AttemptStatus getStatus() { return status; }
     public void setStatus(AttemptStatus status) { this.status = status; }
+
+    public LocalDateTime getAttemptedAt() { return attemptedAt; }
+    public void setAttemptedAt(LocalDateTime attemptedAt) {
+        this.attemptedAt = attemptedAt;
+    }
 }

@@ -18,14 +18,6 @@ public class StudentProfile {
     private Boolean active;
     private LocalDateTime createdAt;
 
-    public StudentProfile() {}
-
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    // REQUIRED BY TESTS
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -48,4 +40,5 @@ public class StudentProfile {
     public void setActive(Boolean active) { this.active = active; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

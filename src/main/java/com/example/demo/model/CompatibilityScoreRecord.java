@@ -18,18 +18,8 @@ public class CompatibilityScoreRecord {
     private CompatibilityLevel compatibilityLevel;
 
     private LocalDateTime computedAt;
-
-    @Lob
     private String detailsJson;
 
-    public CompatibilityScoreRecord() {}
-
-    @PrePersist
-    public void computeTime() {
-        this.computedAt = LocalDateTime.now();
-    }
-
-   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -48,6 +38,7 @@ public class CompatibilityScoreRecord {
     }
 
     public LocalDateTime getComputedAt() { return computedAt; }
+    public void setComputedAt(LocalDateTime computedAt) { this.computedAt = computedAt; }
 
     public String getDetailsJson() { return detailsJson; }
     public void setDetailsJson(String detailsJson) { this.detailsJson = detailsJson; }
