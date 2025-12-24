@@ -1,31 +1,69 @@
 package com.example.demo.service.impl;
 
-import java.time.LocalDateTime;
-import org.springframework.stereotype.Service;
 import com.example.demo.model.CompatibilityScoreRecord;
+import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.CompatibilityScoreRecordRepository;
+import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.CompatibilityScoreService;
+import com.example.demo.exception.ResourceNotFoundException;
 
-@Service
+import java.util.List;
+
 public class CompatibilityScoreServiceImpl implements CompatibilityScoreService {
 
-    private final CompatibilityScoreRecordRepository repo;
+    private final CompatibilityScoreRecordRepository scoreRepo;
+    private final HabitProfileRepository habitRepo;
 
-    public CompatibilityScoreServiceImpl(CompatibilityScoreRecordRepository repo) {
-        this.repo = repo;
+
+    public CompatibilityScoreServiceImpl(
+            CompatibilityScoreRecordRepository scoreRepo,
+            HabitProfileRepository habitRepo) {
+        this.scoreRepo = scoreRepo;
+        this.habitRepo = habitRepo;
     }
 
     @Override
-    public CompatibilityScoreRecord compute(Long a, Long b) {
-        int score = (int) Math.round(Math.random() * 100);
+    public CompatibilityScoreRecord computeScore(Long a, Long b) {
+
+        if (a.equals(b)) {
+            throw new IllegalArgumentException("same student");
+        }
+
+        HabitProfile h1 = habitRepo.findByStudentId(a)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+        HabitProfile h2 = habitRepo.findByStudentId(b)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+
+        double score = 100 - Math.abs(h1.getStudyHoursPerDay() - h2.getStudyHoursPerDay()) * 5;
+        score = Math.max(0, Math.min(100, score));
 
         CompatibilityScoreRecord r = new CompatibilityScoreRecord();
         r.setStudentAId(a);
         r.setStudentBId(b);
         r.setScore(score);
-        r.setCompatibilityLevel(score >= 70 ? "HIGH" : "LOW");
-        r.setComputedAt(LocalDateTime.now());
+        r.setCompatibilityLevel(
+                score >= 80 ? "EXCELLENT" :
+                score >= 60 ? "HIGH" :
+                score >= 40 ? "MEDIUM" : "LOW"
+        );
+        r.setDetailsJson("{}");
 
-        return repo.save(r);
+        return scoreRepo.save(r);
+    }
+
+    @Override
+    public CompatibilityScoreRecord getScoreById(Long id) {
+        return scoreRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+    }
+
+    @Override
+    public List<CompatibilityScoreRecord> getScoresForStudent(Long studentId) {
+        return scoreRepo.findByStudentAIdOrStudentBId(studentId, studentId);
+    }
+
+    @Override
+    public List<CompatibilityScoreRecord> getAllScores() {
+        return scoreRepo.findAll();
     }
 }

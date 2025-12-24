@@ -1,36 +1,43 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
-import com.example.demo.dto.HabitProfileDto;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.HabitProfileService;
+import com.example.demo.exception.ResourceNotFoundException;
 
-@Service
+import java.util.List;
+
 public class HabitProfileServiceImpl implements HabitProfileService {
 
     private final HabitProfileRepository repo;
+
 
     public HabitProfileServiceImpl(HabitProfileRepository repo) {
         this.repo = repo;
     }
 
     @Override
-    public HabitProfile createOrUpdate(HabitProfileDto dto) {
-        HabitProfile h = repo.findByStudentId(dto.getStudentId())
-                .orElse(new HabitProfile());
-
-        h.setStudentId(dto.getStudentId());
-        h.setSleepSchedule(dto.getSleepSchedule());
-        h.setCleanlinessLevel(dto.getCleanlinessLevel());
-        h.setNoiseTolerance(dto.getNoiseTolerance());
-        h.setSocialPreference(dto.getSocialPreference());
-
-        return repo.save(h);
+    public HabitProfile createOrUpdateHabit(HabitProfile habit) {
+        if (habit.getStudyHoursPerDay() < 0) {
+            throw new IllegalArgumentException("study hours");
+        }
+        return repo.save(habit);
     }
 
     @Override
-    public HabitProfile getForStudent(Long studentId) {
-        return repo.findByStudentId(studentId).orElse(null);
+    public HabitProfile getHabitByStudent(Long studentId) {
+        return repo.findByStudentId(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+    }
+
+    @Override
+    public List<HabitProfile> getAllHabitProfiles() {
+        return repo.findAll();
+    }
+
+    @Override
+    public HabitProfile getHabitById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
     }
 }

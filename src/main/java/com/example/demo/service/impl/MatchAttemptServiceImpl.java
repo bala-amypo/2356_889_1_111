@@ -1,38 +1,45 @@
 package com.example.demo.service.impl;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import org.springframework.stereotype.Service;
 import com.example.demo.model.MatchAttemptRecord;
 import com.example.demo.repository.MatchAttemptRecordRepository;
+import com.example.demo.repository.CompatibilityScoreRecordRepository;
 import com.example.demo.service.MatchAttemptService;
+import com.example.demo.exception.ResourceNotFoundException;
 
-@Service
+import java.util.List;
+
 public class MatchAttemptServiceImpl implements MatchAttemptService {
 
     private final MatchAttemptRecordRepository repo;
+    private final CompatibilityScoreRecordRepository scoreRepo;
 
-    public MatchAttemptServiceImpl(MatchAttemptRecordRepository repo) {
+    public MatchAttemptServiceImpl(
+            MatchAttemptRecordRepository repo,
+            CompatibilityScoreRecordRepository scoreRepo) {
         this.repo = repo;
+        this.scoreRepo = scoreRepo;
     }
 
     @Override
-    public MatchAttemptRecord computeMatch(Long a, Long b) {
-        MatchAttemptRecord r = new MatchAttemptRecord();
-        r.setStudentAId(a);
-        r.setStudentBId(b);
-        r.setScore((int) (Math.random() * 100));
-        r.setAttemptedAt(LocalDateTime.now());
+    public MatchAttemptRecord logMatchAttempt(MatchAttemptRecord attempt) {
+        return repo.save(attempt);
+    }
+
+    @Override
+    public List<MatchAttemptRecord> getAttemptsByStudent(Long studentId) {
+        return repo.findByInitiatorStudentIdOrCandidateStudentId(studentId, studentId);
+    }
+
+    @Override
+    public MatchAttemptRecord updateAttemptStatus(Long id, String status) {
+        MatchAttemptRecord r = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+        r.setStatus(status);
         return repo.save(r);
     }
 
     @Override
-    public List<MatchAttemptRecord> getMatchesForStudent(Long id) {
-        return repo.findByStudentAIdOrStudentBId(id, id);
-    }
-
-    @Override
-    public MatchAttemptRecord getMatchById(Long id) {
-        return repo.findById(id).orElse(null);
+    public List<MatchAttemptRecord> getAllMatchAttempts() {
+        return repo.findAll();
     }
 }
