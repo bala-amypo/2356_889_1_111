@@ -1,13 +1,24 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class RoomAssignmentRecord {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long studentAId;
     private Long studentBId;
     private String roomNumber;
-    private AssignmentStatus status;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status { ACTIVE, COMPLETED }
+
+    // ===== getters & setters =====
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -20,6 +31,6 @@ public class RoomAssignmentRecord {
     public String getRoomNumber() { return roomNumber; }
     public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public AssignmentStatus getStatus() { return status; }
-    public void setStatus(AssignmentStatus status) { this.status = status; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 }

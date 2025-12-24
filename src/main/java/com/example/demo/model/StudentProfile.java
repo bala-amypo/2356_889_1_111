@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
 public class StudentProfile {
@@ -12,31 +9,28 @@ public class StudentProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String studentId;
 
-    private boolean active;
+    @Column(unique = true)
+    private String email;
 
-    public Long getId() {
-        return id;
-    }
+    private String fullName;
+    private Boolean active = true;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // ===== getters & setters =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getStudentId() {
-        return studentId;
-    }
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public boolean isActive() {
-        return active;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
