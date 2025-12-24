@@ -1,15 +1,12 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.HabitProfile;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface HabitProfileRepository {
-
-    HabitProfile save(HabitProfile habitProfile);
+@Repository
+public interface HabitProfileRepository
+        extends JpaRepository<HabitProfile, Long> {
 
     HabitProfile findByStudentId(Long studentId);
-
-    HabitProfile findById(Long id);  
-
-    List<HabitProfile> findAll();
 }

@@ -1,14 +1,32 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+
+@Entity
 public class HabitProfile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long studentId;
     private int studyHoursPerDay;
 
+    @Enumerated(EnumType.STRING)
     private CleanlinessLevel cleanlinessLevel;
+
+    @Enumerated(EnumType.STRING)
     private NoiseTolerance noiseTolerance;
+
+    @Enumerated(EnumType.STRING)
     private SleepSchedule sleepSchedule;
+
+    @Enumerated(EnumType.STRING)
     private SocialPreference socialPreference;
 
     public Long getId() {
@@ -27,7 +45,6 @@ public class HabitProfile {
         this.studentId = studentId;
     }
 
-    // 🔴 REQUIRED BY HabitProfileServiceImpl
     public int getStudyHoursPerDay() {
         return studyHoursPerDay;
     }
