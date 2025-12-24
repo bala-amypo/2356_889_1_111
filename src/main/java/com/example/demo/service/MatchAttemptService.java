@@ -7,9 +7,9 @@ public interface MatchAttemptService {
 
     MatchAttemptRecord logMatchAttempt(MatchAttemptRecord attempt);
 
-    List<MatchAttemptRecord> getAttemptsByStudent(Long studentId);
+    MatchAttemptRecord updateAttemptStatus(Long id, String status);
 
-    MatchAttemptRecord updateAttemptStatus(Long attemptId, String status);
+    List<MatchAttemptRecord> getAttemptsByStudent(Long studentId);
 
     List<MatchAttemptRecord> getAllMatchAttempts();
 }

@@ -29,7 +29,6 @@ public class RoomAssignmentServiceImpl implements RoomAssignmentService {
 
         StudentProfile a = studentRepo.findById(record.getStudentAId())
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
-
         StudentProfile b = studentRepo.findById(record.getStudentBId())
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
 

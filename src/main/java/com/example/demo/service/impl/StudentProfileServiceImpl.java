@@ -19,7 +19,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     @Override
     public StudentProfile createStudent(StudentProfile profile) {
-        if (repo.findByStudentId(profile.getStudentId()).isPresent()) {
+        if (repo.findByStudentId(profile.getStudentId()) != null) {
             throw new IllegalArgumentException("studentId exists");
         }
         return repo.save(profile);
@@ -32,20 +32,23 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     }
 
     @Override
+    public StudentProfile findByStudentId(String studentId) {
+        StudentProfile p = repo.findByStudentId(studentId);
+        if (p == null) {
+            throw new ResourceNotFoundException("not found");
+        }
+        return p;
+    }
+
+    @Override
     public List<StudentProfile> getAllStudents() {
         return repo.findAll();
     }
 
     @Override
-    public StudentProfile findByStudentId(String studentId) {
-        return repo.findByStudentId(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
-    }
-
-    @Override
     public StudentProfile updateStudentStatus(Long id, boolean active) {
-        StudentProfile sp = getStudentById(id);
-        sp.setActive(active);
-        return repo.save(sp);
+        StudentProfile p = getStudentById(id);
+        p.setActive(active);
+        return repo.save(p);
     }
 }

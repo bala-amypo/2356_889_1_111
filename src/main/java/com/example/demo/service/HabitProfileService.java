@@ -9,7 +9,7 @@ public interface HabitProfileService {
 
     HabitProfile getHabitByStudent(Long studentId);
 
-    List<HabitProfile> getAllHabitProfiles();
-
     HabitProfile getHabitById(Long id);
+
+    List<HabitProfile> getAllHabitProfiles();
 }

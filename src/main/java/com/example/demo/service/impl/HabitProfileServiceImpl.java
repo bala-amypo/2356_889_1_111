@@ -27,18 +27,21 @@ public class HabitProfileServiceImpl implements HabitProfileService {
 
     @Override
     public HabitProfile getHabitByStudent(Long studentId) {
-        return repo.findByStudentId(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
-    }
-
-    @Override
-    public List<HabitProfile> getAllHabitProfiles() {
-        return repo.findAll();
+        HabitProfile h = repo.findByStudentId(studentId);
+        if (h == null) {
+            throw new ResourceNotFoundException("not found");
+        }
+        return h;
     }
 
     @Override
     public HabitProfile getHabitById(Long id) {
         return repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
+    }
+
+    @Override
+    public List<HabitProfile> getAllHabitProfiles() {
+        return repo.findAll();
     }
 }

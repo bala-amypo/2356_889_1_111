@@ -31,10 +31,12 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
             throw new IllegalArgumentException("same student");
         }
 
-        HabitProfile h1 = habitRepo.findByStudentId(a)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
-        HabitProfile h2 = habitRepo.findByStudentId(b)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+        HabitProfile h1 = habitRepo.findByStudentId(a);
+        HabitProfile h2 = habitRepo.findByStudentId(b);
+
+        if (h1 == null || h2 == null) {
+            throw new ResourceNotFoundException("not found");
+        }
 
         double score = 100 - Math.abs(
                 h1.getStudyHoursPerDay() - h2.getStudyHoursPerDay()) * 5;
@@ -45,7 +47,6 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
         r.setStudentBId(b);
         r.setScore(score);
 
-        
         r.setCompatibilityLevel(
                 score >= 80 ? CompatibilityLevel.EXCELLENT :
                 score >= 60 ? CompatibilityLevel.HIGH :

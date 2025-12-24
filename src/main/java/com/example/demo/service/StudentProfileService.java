@@ -9,9 +9,9 @@ public interface StudentProfileService {
 
     StudentProfile getStudentById(Long id);
 
-    List<StudentProfile> getAllStudents();
-
     StudentProfile findByStudentId(String studentId);
+
+    List<StudentProfile> getAllStudents();
 
     StudentProfile updateStudentStatus(Long id, boolean active);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface CompatibilityScoreService {
 
-    CompatibilityScoreRecord computeScore(Long studentAId, Long studentBId);
+    CompatibilityScoreRecord computeScore(Long a, Long b);
 
     CompatibilityScoreRecord getScoreById(Long id);
 
