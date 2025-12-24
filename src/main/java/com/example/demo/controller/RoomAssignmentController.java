@@ -4,10 +4,8 @@ import com.example.demo.model.RoomAssignmentRecord;
 import com.example.demo.service.RoomAssignmentService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/room-assignments")
+@RequestMapping("/rooms")
 public class RoomAssignmentController {
 
     private final RoomAssignmentService service;
@@ -17,32 +15,9 @@ public class RoomAssignmentController {
     }
 
     @PostMapping
-    public RoomAssignmentRecord assign(@RequestBody RoomAssignmentRecord record) {
-        return service.assignRoom(record);
-    }
-
-    @PutMapping("/{id}/status")
-    public RoomAssignmentRecord updateStatus(
-            @PathVariable Long id,
-            @RequestParam String status) {
-
-        return service.updateStatus(id, status);
-    }
-
-    @GetMapping("/{id}")
-    public RoomAssignmentRecord getById(@PathVariable Long id) {
-        return service.getAssignmentById(id);
-    }
-
-    @GetMapping("/student/{studentId}")
-    public List<RoomAssignmentRecord> getByStudent(
-            @PathVariable Long studentId) {
-
-        return service.getAssignmentsByStudent(studentId);
-    }
-
-    @GetMapping
-    public List<RoomAssignmentRecord> getAll() {
-        return service.getAllAssignments();
+    public RoomAssignmentRecord assign(
+            @RequestParam Long studentAId,
+            @RequestParam Long studentBId) {
+        return service.assign(studentAId, studentBId);
     }
 }
