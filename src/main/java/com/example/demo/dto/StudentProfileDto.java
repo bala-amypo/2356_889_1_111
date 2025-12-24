@@ -3,14 +3,11 @@ package com.example.demo.dto;
 public class StudentProfileDto {
 
     private String studentId;
-    private String fullName;
     private String email;
-    private String department;
-    private Integer yearLevel;
+    private String fullName;
     private Boolean active;
 
-    public StudentProfileDto() {
-    }
+    public StudentProfileDto() {}
 
     public String getStudentId() {
         return studentId;
@@ -20,42 +17,26 @@ public class StudentProfileDto {
         this.studentId = studentId;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getEmail() {
         return email;
     }
-
+ 
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getDepartment() {
-        return department;
+ 
+    public String getFullName() {
+        return fullName;
     }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public Integer getYearLevel() {
-        return yearLevel;
-    }
-
-    public void setYearLevel(Integer yearLevel) {
-        this.yearLevel = yearLevel;
+ 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Boolean getActive() {
         return active;
     }
-
+ 
     public void setActive(Boolean active) {
         this.active = active;
     }

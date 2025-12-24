@@ -1,18 +1,28 @@
 package com.example.demo.security;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private static final Map<String, UserDetails> USERS = new HashMap<>();
+
+    static {
+        USERS.put("admin", User.withUsername("admin")
+                .password("{noop}admin")
+                .roles("ADMIN")
+                .build());
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        if ("admin".equals(username)) {
-            return new User("admin", "admin123", List.of());
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails user = USERS.get(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
         }
-        throw new RuntimeException("user not found");
+        return user;
     }
 }

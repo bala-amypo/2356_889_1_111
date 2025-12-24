@@ -1,19 +1,29 @@
 package com.example.demo.security;
 
-import java.util.Base64;
+import io.jsonwebtoken.*;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+@Component
 public class JwtUtil {
 
+    private final String SECRET = "secret-key-demo";
+    private final long EXPIRY = 1000 * 60 * 60;
+
     public String generateToken(String username, String role, String email, String userId) {
-        String payload = username + ":" + role + ":" + email + ":" + userId;
-        return Base64.getEncoder().encodeToString(payload.getBytes());
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("role", role)
+                .claim("email", email)
+                .claim("userId", userId)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRY))
+                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .compact();
     }
 
     public void validate(String token) {
-        try {
-            Base64.getDecoder().decode(token);
-        } catch (Exception e) {
-            throw new RuntimeException("Invalid token");
-        }
+        Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
     }
 }
