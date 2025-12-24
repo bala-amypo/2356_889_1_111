@@ -3,24 +3,20 @@ package com.example.demo.dto;
 public class AuthResponse {
 
     private String token;
-    private String email;
-    private String role;
+    private int statusCodeValue;
 
-    public AuthResponse(String token, String email, String role) {
+    public AuthResponse() {}
+
+    public AuthResponse(String token, int statusCodeValue) {
         this.token = token;
-        this.email = email;
-        this.role = role;
+        this.statusCodeValue = statusCodeValue;
     }
 
-    public String getToken() {
-        return token;
-    }
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRole() {
-        return role;
+    public int getStatusCodeValue() { return statusCodeValue; }
+    public void setStatusCodeValue(int statusCodeValue) {
+        this.statusCodeValue = statusCodeValue;
     }
 }

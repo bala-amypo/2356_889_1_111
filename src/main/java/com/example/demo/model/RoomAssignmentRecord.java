@@ -13,22 +13,23 @@ public class RoomAssignmentRecord {
     private String roomNumber;
     private Long studentAId;
     private Long studentBId;
+
+    @Enumerated(EnumType.STRING)
+    private AssignmentStatus status;
+
     private LocalDateTime assignedAt;
-    private String status;
+
+    public RoomAssignmentRecord() {}
 
     @PrePersist
-    public void onAssign() {
+    public void assignTime() {
         this.assignedAt = LocalDateTime.now();
     }
 
-    // getters & setters
+    
     public Long getId() { return id; }
-    public Long getStudentAId() { return studentAId; }
-    public void setStudentAId(Long studentAId) { this.studentAId = studentAId; }
-    public Long getStudentBId() { return studentBId; }
-    public void setStudentBId(Long studentBId) { this.studentBId = studentBId; }
-    public String getRoomNumber() { return roomNumber; }
-    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setId(Long id) { this.id = id; }
+
+    public AssignmentStatus getStatus() { return status; }
+    public void setStatus(AssignmentStatus status) { this.status = status; }
 }
