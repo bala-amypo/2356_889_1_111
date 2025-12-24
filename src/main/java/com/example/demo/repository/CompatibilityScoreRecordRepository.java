@@ -1,8 +1,10 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.CompatibilityScoreRecord;
-import java.util.Optional;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CompatibilityScoreRecordRepository {
-    Optional<CompatibilityScoreRecord> findById(Long id);
+
+    CompatibilityScoreRecord findById(Long id);
 }

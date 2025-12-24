@@ -16,6 +16,11 @@ public class CompatibilityScoreServiceImpl implements CompatibilityScoreService 
 
     @Override
     public CompatibilityScoreRecord getScore(Long id) {
-        return repo.findById(id).orElse(null);
+       
+        CompatibilityScoreRecord record = repo.findById(id);
+        if (record == null) {
+            throw new RuntimeException("Not found");
+        }
+        return record;
     }
 }
