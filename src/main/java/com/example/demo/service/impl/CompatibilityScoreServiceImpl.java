@@ -4,6 +4,8 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.CompatibilityScoreService;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.CompatibilityScoreRecordRepository;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
