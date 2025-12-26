@@ -11,10 +11,7 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig {
 
-    /**
-     * REQUIRED by testcase:
-     * DemoMassiveTestNGTests.t115_config_swaggerOpenApiBean()
-     */
+    
     @Bean
     public OpenAPI api() {
         return new OpenAPI()
