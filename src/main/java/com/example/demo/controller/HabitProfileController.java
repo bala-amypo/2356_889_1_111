@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.service.HabitProfileService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/habits")
 public class HabitProfileController {
 
     private final HabitProfileService service;
@@ -12,7 +15,10 @@ public class HabitProfileController {
         this.service = service;
     }
 
-    public ResponseEntity<HabitProfile> getByStudent(Long studentId) {
+    @GetMapping("/{studentId}")
+    public ResponseEntity<HabitProfile> getByStudent(
+            @PathVariable Long studentId
+    ) {
         return ResponseEntity.ok(service.getHabitByStudent(studentId));
     }
 }

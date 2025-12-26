@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/students")
 public class StudentProfileController {
 
     private final StudentProfileService service;
@@ -12,7 +15,10 @@ public class StudentProfileController {
         this.service = service;
     }
 
-    public ResponseEntity<StudentProfile> create(StudentProfile s) {
+    @PostMapping
+    public ResponseEntity<StudentProfile> create(
+            @RequestBody StudentProfile s
+    ) {
         return ResponseEntity.ok(service.createStudent(s));
     }
 }

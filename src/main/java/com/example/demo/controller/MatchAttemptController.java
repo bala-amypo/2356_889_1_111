@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.model.MatchAttemptRecord;
 import com.example.demo.service.MatchAttemptService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/matches")
 public class MatchAttemptController {
 
     private final MatchAttemptService service;
@@ -12,7 +15,10 @@ public class MatchAttemptController {
         this.service = service;
     }
 
-    public ResponseEntity<MatchAttemptRecord> log(MatchAttemptRecord record) {
+    @PostMapping
+    public ResponseEntity<MatchAttemptRecord> log(
+            @RequestBody MatchAttemptRecord record
+    ) {
         return ResponseEntity.ok(service.logMatchAttempt(record));
     }
 }
