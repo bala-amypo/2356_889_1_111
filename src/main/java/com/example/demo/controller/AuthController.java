@@ -1,26 +1,27 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthRequest;
-import com.example.demo.security.JwtUtil;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.service.AuthService;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@RestController
+@RequestMapping("/auth")
 public class AuthController {
 
-    private final JwtUtil jwtUtil;
-    private final Map<String, String> users = new HashMap<>();
+    private final AuthService authService;
 
-    public AuthController(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
-    public ResponseEntity<?> register(AuthRequest req) {
-        if (users.containsKey(req.getUsername())) {
-            return ResponseEntity.badRequest().build();
-        }
-        users.put(req.getUsername(), req.getPassword());
-        return ResponseEntity.ok("registered");
+    @PostMapping("/register")
+    public AuthResponse register(@RequestBody AuthRequest request) {
+        return authService.register(request);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody AuthRequest request) {
+        return authService.login(request);
     }
 }

@@ -1,9 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.StudentProfileDto;
 import com.example.demo.model.StudentProfile;
 import com.example.demo.service.StudentProfileService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/students")
 public class StudentProfileController {
 
     private final StudentProfileService service;
@@ -12,7 +17,25 @@ public class StudentProfileController {
         this.service = service;
     }
 
-    public ResponseEntity<StudentProfile> create(StudentProfile s) {
-        return ResponseEntity.ok(service.createStudent(s));
+    @PostMapping
+    public StudentProfile create(@RequestBody StudentProfileDto dto,
+                                 @RequestParam Long userId) {
+        return service.createProfile(dto, userId);
+    }
+
+    @PutMapping("/{id}")
+    public StudentProfile update(@PathVariable Long id,
+                                 @RequestBody StudentProfileDto dto) {
+        return service.updateProfile(id, dto);
+    }
+
+    @GetMapping("/{id}")
+    public StudentProfile get(@PathVariable Long id) {
+        return service.getProfile(id);
+    }
+
+    @GetMapping
+    public List<StudentProfile> list() {
+        return service.getAllProfiles();
     }
 }
