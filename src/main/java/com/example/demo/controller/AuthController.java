@@ -2,16 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.security.JwtUtil;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/auth")
-@Tag(name = "Authentication")
 public class AuthController {
 
     private final JwtUtil jwtUtil;
@@ -21,10 +16,9 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody AuthRequest req) {
+    public ResponseEntity<?> register(AuthRequest req) {
         if (users.containsKey(req.getUsername())) {
-            return ResponseEntity.badRequest().body("User already exists");
+            return ResponseEntity.badRequest().build();
         }
         users.put(req.getUsername(), req.getPassword());
         return ResponseEntity.ok("registered");
