@@ -4,9 +4,10 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.RoomAssignmentService;
 import com.example.demo.exception.ResourceNotFoundException;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class RoomAssignmentServiceImpl implements RoomAssignmentService {
 
     private final RoomAssignmentRecordRepository roomRepo;

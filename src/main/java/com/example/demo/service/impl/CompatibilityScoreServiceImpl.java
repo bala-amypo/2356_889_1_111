@@ -5,12 +5,13 @@ import com.example.demo.repository.*;
 import com.example.demo.service.CompatibilityScoreService;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.CompatibilityScoreRecordRepository;
-
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CompatibilityScoreServiceImpl implements CompatibilityScoreService {
 
     private final CompatibilityScoreRecordRepository scoreRepo;
