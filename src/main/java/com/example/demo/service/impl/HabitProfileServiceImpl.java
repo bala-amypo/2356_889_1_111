@@ -1,13 +1,13 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.HabitProfileDto;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.HabitProfile;
 import com.example.demo.repository.HabitProfileRepository;
 import com.example.demo.service.HabitProfileService;
-import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 @Service
 public class HabitProfileServiceImpl implements HabitProfileService {
@@ -18,40 +18,29 @@ public class HabitProfileServiceImpl implements HabitProfileService {
         this.repo = repo;
     }
 
-    @Override
-    public HabitProfile createOrUpdateHabit(HabitProfile habit) {
-        if (habit.getStudyHoursPerDay() != null && habit.getStudyHoursPerDay() < 0) {
-            throw new IllegalArgumentException("study hours invalid");
+    public HabitProfile createOrUpdateHabit(HabitProfile h) {
+        if (h.getStudyHoursPerDay() != null && h.getStudyHoursPerDay() < 0)
+            throw new IllegalArgumentException("study hours");
+
+        HabitProfile existing = repo.findByStudentId(h.getStudentId()).orElse(null);
+
+        if (existing != null) {
+            h.setId(existing.getId());
         }
 
-        Optional<HabitProfile> existing = repo.findByStudentId(habit.getStudentId());
-        if (existing.isPresent()) {
-            HabitProfile h = existing.get();
-            h.setStudyHoursPerDay(habit.getStudyHoursPerDay());
-            h.setSleepSchedule(habit.getSleepSchedule());
-            h.setCleanlinessLevel(habit.getCleanlinessLevel());
-            h.setNoiseTolerance(habit.getNoiseTolerance());
-            h.setSocialPreference(habit.getSocialPreference());
-            h.setUpdatedAt(LocalDateTime.now());
-            return repo.save(h);
-        }
-
-        habit.setUpdatedAt(LocalDateTime.now());
-        return repo.save(habit);
+        h.setUpdatedAt(java.time.LocalDateTime.now());
+        return repo.save(h);
     }
 
-    @Override
-    public HabitProfile getHabitByStudent(Long studentId) {
-        return repo.findByStudentId(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("habit not found"));
+    public HabitProfile getHabitByStudent(Long id) {
+        return repo.findByStudentId(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
     }
 
-    @Override
     public Optional<HabitProfile> getHabitById(Long id) {
         return repo.findById(id);
     }
 
-    @Override
     public List<HabitProfile> getAllHabitProfiles() {
         return repo.findAll();
     }
